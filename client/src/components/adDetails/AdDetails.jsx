@@ -18,7 +18,7 @@ const AdDetails = () => {
 
   return (
 
-            <div className={`container  d-flex flex-column align-items-center ${styles.paper}`} >
+            <div className={`d-flex flex-column align-items-center ${styles.paper}`} >
                 <h2 className={styles.title}> Advertisement Title </h2>
 
                     <div className='d-flex mt-1 p-3 gap-5' style={{width: '550px', height: '350px'}}>
