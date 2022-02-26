@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import AdDetails from './components/AdDetails';
+import FilterBar from './components/FilterBar'
 import Main from './views/Main';
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
         <Main>
           <Switch>
             <Route path='/addetails'>
-              <AdDetails />
+              <FilterBar />
             </Route>
           </Switch>
         </Main>
