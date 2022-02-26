@@ -13,7 +13,7 @@ function App() {
       <BrowserRouter>
         <Main>
           <Switch>
-            <Route path='/'>
+            <Route path='/addetails'>
               <AdDetails />
             </Route>
           </Switch>
