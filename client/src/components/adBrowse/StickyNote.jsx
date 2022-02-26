@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './StickyNote.module.css';
 
-const StickyNote = () => {
+const StickyNote = ({ ad }) => {
+    console.log(ad);
     return (
         <a href="#" className={styles.stickyNote} >
-            <img src="#" className={styles.image} />
-            <h6 className={styles.title}>Advertisement Title</h6>
-            <p>$X.XX</p>
+            <img src={ad.image} className={styles.image} />
+            <h6 className={styles.title}>{ad.title}</h6>
+            <p>${ad.price}</p>
         </a>
     )
 }
