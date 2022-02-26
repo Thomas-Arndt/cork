@@ -61,7 +61,7 @@ const NewAdForm = () => {
                     <div className="d-flex flex-column">
                         <label for="category" >Category</label>
                         <select name="category" className="form-control">
-                            <option value="">- Choose a Category -</option>
+                            <option value="">Choose a Category</option>
                             {categories.map((category, i) => 
                                 <option value={category}>{category}</option>
                             )}
