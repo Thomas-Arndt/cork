@@ -7,13 +7,16 @@ import {
 import AllAds from './components/adBrowse/AllAds';
 import StickyNote from './components/adBrowse/StickyNote';
 
-import AdDetails from './components/AdDetails';
+import AdDetails from './components/adDetails/AdDetails';
+import FilterBar from './components/navigation/FilterBar'
 import EditAdForm from './components/editCreateAdForms/EditAdForm';
 import NewAdForm from './components/editCreateAdForms/NewAdForm';
 import TitleNote from './components/navigation/TitleNote';
 import ComponentWithNavigation from './views/ComponentWithNavigation';
 
 import Main from './views/Main';
+import FilterForm from './components/navigation/FilterForm';
+import SearchBar from './components/navigation/SearchBar';
 
 function App() {
 
@@ -41,8 +44,11 @@ function App() {
               <Route path='/'>
                 <ComponentWithNavigation >
                   <TitleNote />
-                  <StickyNote />
-                  <AllAds adList={adList} />
+                  <FilterBar>
+                    <FilterForm />
+                    <SearchBar />
+                  </FilterBar>
+                  <NewAdForm />
                 </ComponentWithNavigation>
               </Route>
             </Switch>
