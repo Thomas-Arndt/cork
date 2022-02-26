@@ -4,6 +4,7 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+import StickyNote from './components/adBrowse/StickyNote';
 import EditAdForm from './components/editCreateAdForms/EditAdForm';
 import NewAdForm from './components/editCreateAdForms/NewAdForm';
 import TitleNote from './components/navigation/TitleNote';
@@ -16,7 +17,7 @@ function App() {
           <Main>
             <Switch>
               <Route path='/'>
-                <TitleNote />
+                <StickyNote />
               </Route>
             </Switch>
           </Main>
