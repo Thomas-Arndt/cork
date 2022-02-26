@@ -5,9 +5,12 @@ import {
   Route
 } from 'react-router-dom';
 import StickyNote from './components/adBrowse/StickyNote';
+
+import AdDetails from './components/AdDetails';
 import EditAdForm from './components/editCreateAdForms/EditAdForm';
 import NewAdForm from './components/editCreateAdForms/NewAdForm';
 import TitleNote from './components/navigation/TitleNote';
+
 import Main from './views/Main';
 
 function App() {
@@ -17,7 +20,7 @@ function App() {
           <Main>
             <Switch>
               <Route path='/'>
-                <StickyNote />
+                <p>Success!</p>
               </Route>
             </Switch>
           </Main>
