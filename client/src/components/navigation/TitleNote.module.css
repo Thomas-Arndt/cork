@@ -1,0 +1,21 @@
+@font-face {
+    font-family: "Redressed";
+    src: local('Redressed'), url(../../static/fonts/Redressed.ttf) format('truetype');
+}
+
+.paper{
+    background-color: #ffc;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title{
+    font-family: Redressed, serif;
+    font-size: 78px;
+    color: black;
+    text-shadow: 0 0 2px white;
+    text-align: center;
+}
