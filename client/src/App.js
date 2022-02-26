@@ -17,6 +17,10 @@ import ComponentWithNavigation from './views/ComponentWithNavigation';
 import Main from './views/Main';
 import FilterForm from './components/navigation/FilterForm';
 import SearchBar from './components/navigation/SearchBar';
+import NavButtonsContainer from './components/navigation/NavButtonsContainer';
+import PostAd from './components/navigation/navigationButtons/PostAd';
+import Back from './components/navigation/navigationButtons/Back';
+import Browse from './components/navigation/navigationButtons/Browse';
 
 function App() {
 
@@ -42,7 +46,14 @@ function App() {
         <Main>
           <Switch>
             <Route path='/'>
-              <AdDetails />
+              <FilterBar>
+                <FilterForm />
+                <SearchBar />
+                <NavButtonsContainer>
+                  <PostAd />
+                  <Back />
+                </NavButtonsContainer>
+              </FilterBar>
             </Route>
           </Switch>
         </Main>
