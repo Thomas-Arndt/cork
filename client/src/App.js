@@ -24,7 +24,7 @@ function App() {
         <Main>
           <Switch>
             <Route path='/'>
-              <p>Success!</p>
+              <AdDetails />
             </Route>
           </Switch>
         </Main>
