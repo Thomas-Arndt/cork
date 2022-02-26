@@ -48,7 +48,7 @@ function App() {
                     <FilterForm />
                     <SearchBar />
                   </FilterBar>
-                  <NewAdForm />
+                  <AllAds adList={adList} />
                 </ComponentWithNavigation>
               </Route>
             </Switch>

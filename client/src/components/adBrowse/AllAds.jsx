@@ -1,6 +1,6 @@
 import React from 'react';
 import StickyNote from './StickyNote';
-import styles from './StickyNote.module.css';
+import styles from './AllAds.module.css';
 
 const AllAds = ({ adList }) => {
     return (
