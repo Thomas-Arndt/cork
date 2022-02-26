@@ -25,22 +25,22 @@ const FilterForm = () => {
   return (
 
 
-    <div className='container d-flex flex-column align-items-center p-3'>
-        <form>
-            <div className="d-flex flex-column mb-3">
+    <div className='container d-flex flex-column align-items-center px-3 pt-3'>
+        <form className='d-flex flex-column gap-2'>
+            <div className="d-flex flex-column">
                         <label for="category" >Category</label>
-                        <select name="category" className="form-control ">
+                        <select name="category" className=" ">
                             <option value="">Choose a Category</option>
                             {categories.map((category, i) => 
                                 <option value={category}>{category}</option>
                             )}
                         </select>
             </div>
-            <div className='mb-3'>
+            <div className=''>
                 <label>Price</label>
                 <div className='d-flex gap-3 '>
-                    <input type='number' className='form-control' placeholder='min' />
-                    <input type='number' className='form-control' placeholder='max' />
+                    <input type='number' className='form-control p-0 px-2' placeholder='min' />
+                    <input type='number' className='form-control p-0 px-2' placeholder='max' />
                 </div>
             </div>
             <div className='mb-2'>
@@ -53,7 +53,7 @@ const FilterForm = () => {
                     <label for="postedToday" className='mx-3'>Posted Today</label>
                 </div>
             </div>
-            <button className='btn btn-primary mb-2 px-3'>
+            <button className='btn btn-primary p-0 px-1'>
                     Filter
             </button>
         </form>

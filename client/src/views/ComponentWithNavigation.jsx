@@ -12,6 +12,7 @@ const ComponentWithNavigation = ({children}) => {
                     {typeof children === Object && children}
                     {children.length>1 && children[0]}
                     {children.length>1 && children[1]}
+                    <div>.</div>
                 </div>
                 <div className={styles.main}>
                     {children.length>2 && children[2]}
