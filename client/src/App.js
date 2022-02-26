@@ -42,6 +42,28 @@ function App() {
 
   return (
     <div className="App">
+<<<<<<< HEAD
+        <BrowserRouter>
+          <Main>
+            <Switch>
+              <Route path='/'>
+                <ComponentWithNavigation >
+                  <TitleNote />
+                  <FilterBar>
+                    <FilterForm />
+                    <SearchBar />
+                    <NavButtonsContainer >
+                      <PostAd />
+                      <Back />
+                    </NavButtonsContainer>
+                  </FilterBar>
+                  <AllAds adList={adList} />
+                </ComponentWithNavigation>
+              </Route>
+            </Switch>
+          </Main>
+        </BrowserRouter>
+=======
 
       <BrowserRouter>
         <Main>
@@ -59,6 +81,7 @@ function App() {
           </Switch>
         </Main>
       </BrowserRouter>
+>>>>>>> 06f0b22158ea0c85daf5d0dac186f4c353005b7c
     </div>
   );
 }
