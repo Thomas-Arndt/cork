@@ -10,6 +10,7 @@ import AdDetails from './components/AdDetails';
 import EditAdForm from './components/editCreateAdForms/EditAdForm';
 import NewAdForm from './components/editCreateAdForms/NewAdForm';
 import TitleNote from './components/navigation/TitleNote';
+import ComponentWithNavigation from './views/ComponentWithNavigation';
 
 import Main from './views/Main';
 
@@ -20,7 +21,11 @@ function App() {
           <Main>
             <Switch>
               <Route path='/'>
-                <p>Success!</p>
+                <ComponentWithNavigation >
+                  <TitleNote />
+                  <StickyNote />
+                  <AdDetails />
+                </ComponentWithNavigation>
               </Route>
             </Switch>
           </Main>
