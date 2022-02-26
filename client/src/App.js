@@ -4,6 +4,7 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+import AllAds from './components/adBrowse/AllAds';
 import StickyNote from './components/adBrowse/StickyNote';
 
 import AdDetails from './components/AdDetails';
@@ -15,6 +16,23 @@ import ComponentWithNavigation from './views/ComponentWithNavigation';
 import Main from './views/Main';
 
 function App() {
+
+  const adList = [
+    {image: "#", title: "Advertisement Title", price: 100.00},
+    {image: "#", title: "Advertisement Title2", price: 100.00},
+    {image: "#", title: "Advertisement Title3", price: 100.00},
+    {image: "#", title: "Advertisement Title4", price: 100.00},
+    {image: "#", title: "Advertisement Title5", price: 100.00},
+    {image: "#", title: "Advertisement Title6", price: 100.00},
+    {image: "#", title: "Advertisement Title7", price: 100.00},
+    {image: "#", title: "Advertisement Title8", price: 100.00},
+    {image: "#", title: "Advertisement Title9", price: 100.00},
+    {image: "#", title: "Advertisement Title10", price: 100.00},
+    {image: "#", title: "Advertisement Title11", price: 100.00},
+    {image: "#", title: "Advertisement Title12", price: 100.00},
+    {image: "#", title: "Advertisement Title13", price: 100.00}
+  ];
+
   return (
     <div className="App">
         <BrowserRouter>
@@ -24,7 +42,7 @@ function App() {
                 <ComponentWithNavigation >
                   <TitleNote />
                   <StickyNote />
-                  <AdDetails />
+                  <AllAds adList={adList} />
                 </ComponentWithNavigation>
               </Route>
             </Switch>
