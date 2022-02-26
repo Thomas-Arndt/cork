@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './StickyNote.module.css';
 
 const StickyNote = ({ ad }) => {
-    console.log(ad);
     return (
         <a href="#" className={styles.stickyNote} >
             <img src={ad.image} className={styles.image} />
