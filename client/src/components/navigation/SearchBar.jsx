@@ -9,7 +9,7 @@ const SearchBar = () => {
 
 
     <form>
-        <div className='d-flex flex-column p-3'>
+        <div className='d-flex flex-column px-3 pt-3'>
             <input type='text' className='form-control p-0 px-2' placeholder='Search Ads'/>
             <button className='btn btn-primary p-0 px-1 mt-2'>
                 Go!
