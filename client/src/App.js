@@ -4,6 +4,9 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+import EditAdForm from './components/editCreateAdForms/EditAdForm';
+import NewAdForm from './components/editCreateAdForms/NewAdForm';
+import TitleNote from './components/navigation/TitleNote';
 import Main from './views/Main';
 
 function App() {
@@ -13,7 +16,7 @@ function App() {
           <Main>
             <Switch>
               <Route path='/'>
-                <p>Success</p>
+                <TitleNote />
               </Route>
             </Switch>
           </Main>
