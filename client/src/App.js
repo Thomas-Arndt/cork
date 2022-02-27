@@ -5,22 +5,20 @@ import {
   Route
 } from 'react-router-dom';
 import AllAds from './components/adBrowse/AllAds';
-import StickyNote from './components/adBrowse/StickyNote';
 
-import AdDetails from './components/adDetails/AdDetails';
 import FilterBar from './components/navigation/FilterBar'
-import EditAdForm from './components/editCreateAdForms/EditAdForm';
-import NewAdForm from './components/editCreateAdForms/NewAdForm';
 import TitleNote from './components/navigation/TitleNote';
 import ComponentWithNavigation from './views/ComponentWithNavigation';
 
 import Main from './views/Main';
 import FilterForm from './components/navigation/FilterForm';
+import EditAdForm from './components/editCreateAdForms/EditAdForm';
+import NewAdForm from './components/editCreateAdForms/NewAdForm';
 import SearchBar from './components/navigation/SearchBar';
 import NavButtonsContainer from './components/navigation/NavButtonsContainer';
 import PostAd from './components/navigation/navigationButtons/PostAd';
 import Back from './components/navigation/navigationButtons/Back';
-import Browse from './components/navigation/navigationButtons/Browse';
+import AdDetails from './components/adDetails/AdDetails'
 
 function App() {
 
@@ -42,46 +40,27 @@ function App() {
 
   return (
     <div className="App">
-<<<<<<< HEAD
-        <BrowserRouter>
-          <Main>
-            <Switch>
-              <Route path='/'>
-                <ComponentWithNavigation >
-                  <TitleNote />
-                  <FilterBar>
-                    <FilterForm />
-                    <SearchBar />
-                    <NavButtonsContainer >
-                      <PostAd />
-                      <Back />
-                    </NavButtonsContainer>
-                  </FilterBar>
-                  <AllAds adList={adList} />
-                </ComponentWithNavigation>
-              </Route>
-            </Switch>
-          </Main>
-        </BrowserRouter>
-=======
 
       <BrowserRouter>
         <Main>
           <Switch>
             <Route path='/'>
-              <FilterBar>
-                <FilterForm />
-                <SearchBar />
-                <NavButtonsContainer>
-                  <PostAd />
-                  <Back />
-                </NavButtonsContainer>
-              </FilterBar>
+              <ComponentWithNavigation >
+                <TitleNote />
+                <FilterBar>
+                  <FilterForm />
+                  <SearchBar />
+                  <NavButtonsContainer>
+                    <PostAd />
+                    <Back />
+                  </NavButtonsContainer>
+                </FilterBar>
+                <AllAds adList={adList} />
+              </ComponentWithNavigation>
             </Route>
           </Switch>
         </Main>
       </BrowserRouter>
->>>>>>> 06f0b22158ea0c85daf5d0dac186f4c353005b7c
     </div>
   );
 }

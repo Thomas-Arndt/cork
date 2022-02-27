@@ -1,7 +1,9 @@
 .paper {
-    background-color: #fff5c5;
+    background-color: #FFC;
     width: fit-content;
     height: fit-content;
+    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+
 }
 
 @font-face {
