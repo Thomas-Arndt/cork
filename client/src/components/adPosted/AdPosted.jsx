@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './AdPosted.module.css'
+import styles from './AdPosted.module.css';
+import pushPin from '../../static/images/drawing-pin.png';
 
 const AdPosted = () => {
     return (
@@ -9,6 +10,7 @@ const AdPosted = () => {
             <Link className={`btn btn-secondary ${styles.viewNow}`} >View It Now</Link>
             <h5 className={styles.message}>An email has been sent to the address you provided<br></br> that contains links to manage your ad.</h5>
             <h4>Thank you!</h4>
+            <img src={pushPin} alt="Push pin" className={styles.pin} />
         </div>
     )
 }

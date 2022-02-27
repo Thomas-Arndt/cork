@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from "./AdDetail.module.css"
+import pushPin from '../../static/images/drawing-pin.png';
 
 import { Link } from 'react-router-dom'
 import { useParams } from "react-router-dom";
@@ -28,7 +29,7 @@ const AdDetails = () => {
                             </div>
                         </div>
                         <div className={`d-flex flex-column ${styles.info} `}>
-                            <div className='d-flex flex-column align-items-center mt-2 mb-2'>
+                            <div className='d-flex flex-column align-items-center my-2'>
                                 <label className='label'>Category</label>
                                 <h4>category</h4>
                             </div>
@@ -54,7 +55,10 @@ const AdDetails = () => {
                                 Description
                             </p>
                         </div>
-
+                <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinTL}`} />
+                <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinTR}`} />
+                <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinBL}`} />
+                <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinBR}`} />
             </div>
   )
 }
