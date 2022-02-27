@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from "./EditAdForm.module.css";
+import pushPin from '../../static/images/drawing-pin.png';
 
 const EditAdForm = () => {
     const [ title, setTitle ] = useState('');
@@ -102,6 +103,10 @@ const EditAdForm = () => {
                     </div>
                 </div>
             </form>
+            <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinTL}`} />
+            <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinTR}`} />
+            <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinBL}`} />
+            <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinBR}`} />
         </div>
     )
 }

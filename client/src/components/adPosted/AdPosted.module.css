@@ -39,3 +39,12 @@
     font-family: Redressed, serif;
     font-size: 40px;
 }
+
+.pin{
+    width: 55px;
+    height: auto;
+    position: absolute;
+    top: -5px;
+    left: 220px;
+    transition: opacity .2s linear, transform .1s linear;
+}

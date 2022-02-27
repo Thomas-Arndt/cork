@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './ContactForm.module.css'
+import pushPin from '../../static/images/drawing-pin.png';
 
 
 
@@ -12,7 +13,7 @@ const ContactForm = () => {
 
 
     <div className={`d-flex flex-column align-items-center ${styles.paper}`} >
-    <h2 className={styles.title}>Contact The Owner</h2>
+        <h2 className={styles.title}>Contact The Owner</h2>
         <div className={`d-flex justify-content-center mt-2 p-3 ${styles.container}`} >
             <div>
                 <div className='mb-3'>
@@ -30,6 +31,10 @@ const ContactForm = () => {
                 </div>
             </div> 
         </div>
+        <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinTL}`} />
+        <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinTR}`} />
+        <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinBL}`} />
+        <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinBR}`} />
     </div>
 
     

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from "./NewAdForm.module.css";
+import pushPin from '../../static/images/drawing-pin.png'
 
 const NewAdForm = () => {
     const [ title, setTitle ] = useState('');
@@ -102,6 +103,10 @@ const NewAdForm = () => {
                     </div>
                 </div>
             </form>
+            <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinTL}`} />
+            <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinTR}`} />
+            <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinBL}`} />
+            <img src={pushPin} alt="Push pin" className={`${styles.pin} ${styles.pinBR}`} />
         </div>
     )
 }
