@@ -65,7 +65,7 @@
     transform: scale(1.2);
 }
 
-.postLink:hover > .postPin{
+.button:hover > .postPin{
     opacity: 0;
     transform: scale(1.3);
 }

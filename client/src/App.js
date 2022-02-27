@@ -50,7 +50,18 @@ function App() {
         <Main>
           <Switch>
             <Route path='/'>
-              <Landing />
+              <ComponentWithNavigation >
+                <TitleNote />
+                <FilterBar >
+                  <FilterForm />
+                  <SearchBar />
+                  <NavButtonsContainer >
+                    <Back />
+                    <PostAd />
+                  </NavButtonsContainer>
+                </FilterBar>
+                <AllAds adList={adList} />
+              </ComponentWithNavigation>
             </Route>
           </Switch>
         </Main>
