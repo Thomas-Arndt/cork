@@ -20,6 +20,7 @@ import PostAd from './components/navigation/navigationButtons/PostAd';
 import Back from './components/navigation/navigationButtons/Back';
 import Browse from './components/navigation/navigationButtons/Browse';
 import ContactForm from './components/contactForm/ContactForm';
+import AdPosted from './components/adPosted/AdPosted';
 
 
 function App() {
@@ -47,7 +48,18 @@ function App() {
         <Main>
           <Switch>
             <Route path='/'>
-              <ContactForm />
+              <ComponentWithNavigation >
+                <TitleNote />
+                <FilterBar >
+                  <FilterForm />
+                  <SearchBar />
+                  <NavButtonsContainer >
+                    <PostAd />
+                    <Back />
+                  </NavButtonsContainer>
+                </FilterBar>
+                <AdPosted />
+              </ComponentWithNavigation>
             </Route>
           </Switch>
         </Main>
