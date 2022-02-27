@@ -6,6 +6,5 @@
     <li>Java Spring will be used to create a RESTful API server that will handle asynchronous requests from the client side application.</li>
     <li>MySQL will be used as the database to store inforation pertaining to the ads posted through the platform.</li>
     <li>React.js will be utilized to create the dynamic, single-page, client-side application that will send data to the server utilizing Axios.</li>
-    <li>Material-UI will be utilized for the styling of the user interface.</li>
     <li>"User Accounts" will take the form of automated HTML emails that provide the necessary links for update and delete functionality for individual postings. This will reduce the amount of sensitive information stored on the server.</li>
 </ul>
