@@ -12,11 +12,11 @@ const Landing = () => {
             <img src={pushPin} alt="pushpin" className={styles.pinMain} />
             </div>
             <div className="d-flex gap-5 mt-5">
-                <a href="#" id="postLink" className={`${styles.button}  ${styles.postLink}`} >Post an Ad
-                    <img src={pushPin} alt="pushpin" id="postPin" className={`${styles.pinButton} ${styles.postPin}`} />
+                <a href="#" id="postLink" className={styles.button} >Post an Ad
+                    <img src={pushPin} alt="pushpin" id="postPin" className={styles.postPin} />
                 </a>
-                <a href="#" id="postLink" className={`${styles.button}  ${styles.postLink}`} >Browse Ads
-                    <img src={pushPin} alt="pushpin" id="postPin" className={`${styles.pinButton} ${styles.postPin}`} />
+                <a href="#" id="postLink" className={styles.button} >Browse Ads
+                    <img src={pushPin} alt="pushpin" id="postPin" className={styles.postPin} />
                 </a>
             </div>
         </div>
