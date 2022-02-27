@@ -23,6 +23,7 @@ import ContactForm from './components/contactForm/ContactForm';
 import DeleteForm from './components/deleteForm/DeleteForm';
 
 
+
 function App() {
 
   const adList = [
@@ -48,7 +49,18 @@ function App() {
         <Main>
           <Switch>
             <Route path='/'>
-              <DeleteForm />
+              <ComponentWithNavigation >
+                <TitleNote />
+                <FilterBar >
+                  <FilterForm />
+                  <SearchBar />
+                  <NavButtonsContainer >
+                    <PostAd />
+                    <Back />
+                  </NavButtonsContainer>
+                </FilterBar>
+                <AdPosted />
+              </ComponentWithNavigation>
             </Route>
           </Switch>
         </Main>
