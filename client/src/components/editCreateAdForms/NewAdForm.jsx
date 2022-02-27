@@ -56,7 +56,7 @@ const NewAdForm = () => {
     return (
         <div className={`d-flex flex-column align-items-center border p-3 ${styles.paper}`}>
             <h2 className={styles.title}>Post a New Advertisement</h2>
-            <form onSubmit={handleSumbmit}>
+            <form onSubmit={handleSubmit}>
                 <div className="d-flex justify-content-between" >
                     <div className="d-flex flex-column">
                         <label for="title" >Posting Title</label>

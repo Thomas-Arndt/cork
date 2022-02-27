@@ -57,7 +57,9 @@ function App() {
                 <FilterBar >
                   <FilterForm />
                   <SearchBar />
-                  <PostAd />
+                  <NavButtonsContainer >
+                    <PostAd />
+                  </NavButtonsContainer>
                 </FilterBar>
                 <AllAds adList={adList} />
               </ComponentWithNavigation>
@@ -71,7 +73,7 @@ function App() {
                     <Browse />
                   </NavButtonsContainer>
                 </FilterBar>
-                <AllAds adList={adList} />
+                <NewAdForm />
               </ComponentWithNavigation>
             </Route>
             <Route path='/details/:adId'>
@@ -92,8 +94,10 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                  <PostAd />
+                <NavButtonsContainer >
                   <Browse />
+                  <PostAd />
+                </NavButtonsContainer>
                 </FilterBar>
                 <EditAdForm />
               </ComponentWithNavigation>
@@ -102,8 +106,10 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
+                <NavButtonsContainer >
                   <Back />
                   <Browse />
+                </NavButtonsContainer>
                 </FilterBar>
                 <ContactForm />
               </ComponentWithNavigation>
@@ -112,8 +118,10 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
+                <NavButtonsContainer >
                   <Browse />
                   <PostAd />
+                </NavButtonsContainer>
                 </FilterBar>
                 <DeleteForm />
               </ComponentWithNavigation>
@@ -122,8 +130,10 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
+                <NavButtonsContainer >
                   <Browse />
                   <PostAd />
+                </NavButtonsContainer>
                 </FilterBar>
                 <AdPosted />
               </ComponentWithNavigation>
