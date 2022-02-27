@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styles from "./NewAdForm.module.css";
 import pushPin from '../../static/images/drawing-pin.png'
 
 const NewAdForm = () => {
+    const history = useHistory();
     const [ title, setTitle ] = useState('');
     const [ price, setPrice ] = useState(0.00);
     const [ category, setCategory ] = useState('');
@@ -45,11 +47,16 @@ const NewAdForm = () => {
         reader.readAsDataURL(file);
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        history.push('/posted/0');
+    }
 
     return (
         <div className={`d-flex flex-column align-items-center border p-3 ${styles.paper}`}>
             <h2 className={styles.title}>Post a New Advertisement</h2>
-            <form>
+            <form onSubmit={handleSumbmit}>
                 <div className="d-flex justify-content-between" >
                     <div className="d-flex flex-column">
                         <label for="title" >Posting Title</label>
