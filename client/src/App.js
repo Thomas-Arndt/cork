@@ -63,7 +63,7 @@ function App() {
               </ComponentWithNavigation>
             </Route>
             <Route path='/post_ad'>
-            <ComponentWithNavigation >
+              <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
                   <NavButtonsContainer >
@@ -75,7 +75,7 @@ function App() {
               </ComponentWithNavigation>
             </Route>
             <Route path='/details/:adId'>
-            <ComponentWithNavigation >
+              <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
                   <FilterForm />
@@ -89,15 +89,43 @@ function App() {
               </ComponentWithNavigation>
             </Route>
             <Route path='/edit_ad/:adId'>
-            <ComponentWithNavigation >
+              <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                  <NavButtonsContainer >
-                    <Back />
-                    <Browse />
-                  </NavButtonsContainer>
+                  <PostAd />
+                  <Browse />
                 </FilterBar>
                 <EditAdForm />
+              </ComponentWithNavigation>
+            </Route>
+            <Route path='/contact/:adId'>
+              <ComponentWithNavigation >
+                <TitleNote />
+                <FilterBar >
+                  <Back />
+                  <Browse />
+                </FilterBar>
+                <ContactForm />
+              </ComponentWithNavigation>
+            </Route>
+            <Route path='/delete/:adId'>
+              <ComponentWithNavigation >
+                <TitleNote />
+                <FilterBar >
+                  <Browse />
+                  <PostAd />
+                </FilterBar>
+                <DeleteForm />
+              </ComponentWithNavigation>
+            </Route>
+            <Route path='/posted/:adId'>
+              <ComponentWithNavigation >
+                <TitleNote />
+                <FilterBar >
+                  <Browse />
+                  <PostAd />
+                </FilterBar>
+                <AdPosted />
               </ComponentWithNavigation>
             </Route>
             <Route path='/'>
