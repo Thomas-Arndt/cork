@@ -62,7 +62,7 @@ function App() {
                     <PostAd />
                   </NavButtonsContainer>
                 </FilterBar>
-                <NewAdForm />
+                <AllAds adList={adList} />
               </ComponentWithNavigation>
             </Route>
           </Switch>
