@@ -57,7 +57,9 @@ function App() {
                 <FilterBar >
                   <FilterForm />
                   <SearchBar />
-                  <PostAd />
+                  <NavButtonsContainer >
+                    <PostAd />
+                  </NavButtonsContainer>
                 </FilterBar>
                 <AllAds adList={adList} />
               </ComponentWithNavigation>
@@ -92,8 +94,10 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                  <PostAd />
-                  <Browse />
+                  <NavButtonsContainer >
+                    <Browse />
+                    <PostAd />
+                  </NavButtonsContainer>
                 </FilterBar>
                 <EditAdForm />
               </ComponentWithNavigation>
