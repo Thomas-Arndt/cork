@@ -94,10 +94,10 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                <NavButtonsContainer >
-                  <Browse />
-                  <PostAd />
-                </NavButtonsContainer>
+                  <NavButtonsContainer >
+                    <Browse />
+                    <PostAd />
+                  </NavButtonsContainer>
                 </FilterBar>
                 <EditAdForm />
               </ComponentWithNavigation>
@@ -106,10 +106,10 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                <NavButtonsContainer >
-                  <Back />
-                  <Browse />
-                </NavButtonsContainer>
+                  <NavButtonsContainer >
+                    <Back />
+                    <Browse />
+                  </NavButtonsContainer>
                 </FilterBar>
                 <ContactForm />
               </ComponentWithNavigation>
@@ -118,10 +118,10 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                <NavButtonsContainer >
-                  <Browse />
-                  <PostAd />
-                </NavButtonsContainer>
+                  <NavButtonsContainer >
+                    <Browse />
+                    <PostAd />
+                  </NavButtonsContainer>
                 </FilterBar>
                 <DeleteForm />
               </ComponentWithNavigation>
@@ -130,10 +130,10 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                <NavButtonsContainer >
-                  <Browse />
-                  <PostAd />
-                </NavButtonsContainer>
+                  <NavButtonsContainer >
+                    <Browse />
+                    <PostAd />
+                  </NavButtonsContainer>
                 </FilterBar>
                 <AdPosted />
               </ComponentWithNavigation>
