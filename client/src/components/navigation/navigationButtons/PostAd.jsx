@@ -10,7 +10,7 @@ const PostAd = () => {
 
     <button className='btn btn-primary  p-0 px-3'>
         {/* links to create new listing  view, ("/create")*/}
-        <Link to={"#"} className='text-light text-decoration-none'>
+        <Link to={"/post_ad"} className='text-light text-decoration-none'>
             Post Ad
         </Link>
     </button>

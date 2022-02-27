@@ -71,7 +71,7 @@ function App() {
                     <Browse />
                   </NavButtonsContainer>
                 </FilterBar>
-                <NewAdForm />
+                <AllAds adList={adList} />
               </ComponentWithNavigation>
             </Route>
             <Route path='/details/:adId'>
