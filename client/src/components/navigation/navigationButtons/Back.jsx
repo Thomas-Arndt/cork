@@ -10,7 +10,7 @@ const Back = () => {
   return (
 
 
-    <button onClick={() => history.pop()} className='btn btn-primary  p-0 px-3'>
+    <button onClick={() => history.goBack()} className='btn btn-primary  p-0 px-3'>
         Back
     </button>
 
