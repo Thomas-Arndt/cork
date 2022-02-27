@@ -10,7 +10,6 @@
 .wrapper{
     display: flex;
     height: 100vh;
-    overflow-y: auto;
 }
 
 .navigation{
@@ -23,10 +22,10 @@
 
 .main{
     display: flex;
-    /* align-items: center; */
     justify-content: center;
     padding: 20px;
     overflow-y: scroll;
+    width: 100%;
 }
 
 .main::-webkit-scrollbar {
