@@ -20,7 +20,8 @@ import PostAd from './components/navigation/navigationButtons/PostAd';
 import Back from './components/navigation/navigationButtons/Back';
 import Browse from './components/navigation/navigationButtons/Browse';
 import ContactForm from './components/contactForm/ContactForm';
-import AdPosted from './components/adPosted/AdPosted';
+import DeleteForm from './components/deleteForm/DeleteForm';
+
 
 
 function App() {
