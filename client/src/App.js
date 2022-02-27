@@ -71,7 +71,7 @@ function App() {
                     <Browse />
                   </NavButtonsContainer>
                 </FilterBar>
-                <AllAds adList={adList} />
+                <NewAdForm />
               </ComponentWithNavigation>
             </Route>
             <Route path='/details/:adId'>
@@ -102,8 +102,10 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                  <Back />
-                  <Browse />
+                  <NavButtonsContainer >
+                    <Back />
+                    <Browse />
+                  </NavButtonsContainer>
                 </FilterBar>
                 <ContactForm />
               </ComponentWithNavigation>
@@ -112,8 +114,10 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                  <Browse />
-                  <PostAd />
+                  <NavButtonsContainer >
+                    <Browse />
+                    <PostAd />
+                  </NavButtonsContainer>
                 </FilterBar>
                 <DeleteForm />
               </ComponentWithNavigation>
@@ -122,8 +126,10 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                  <Browse />
-                  <PostAd />
+                  <NavButtonsContainer >
+                    <Browse />
+                    <PostAd />
+                  </NavButtonsContainer>
                 </FilterBar>
                 <AdPosted />
               </ComponentWithNavigation>
