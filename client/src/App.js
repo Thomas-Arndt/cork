@@ -21,6 +21,8 @@ import NavButtonsContainer from './components/navigation/NavButtonsContainer';
 import PostAd from './components/navigation/navigationButtons/PostAd';
 import Back from './components/navigation/navigationButtons/Back';
 import Browse from './components/navigation/navigationButtons/Browse';
+import ContactForm from './components/contactForm/ContactForm';
+
 
 function App() {
 
@@ -46,14 +48,7 @@ function App() {
         <Main>
           <Switch>
             <Route path='/'>
-              <FilterBar>
-                <FilterForm />
-                <SearchBar />
-                <NavButtonsContainer>
-                  <PostAd />
-                  <Back />
-                </NavButtonsContainer>
-              </FilterBar>
+              <ContactForm />
             </Route>
           </Switch>
         </Main>
