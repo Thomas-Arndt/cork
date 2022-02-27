@@ -43,7 +43,7 @@ const AdDetails = () => {
                             </div>
                             <button className='btn btn-primary mt-2'>
                                 {/* links to contact listing owner view, ("/#/" + creator._id + "/contact")*/}
-                                <Link to={"#"} className='text-light text-decoration-none'>
+                                <Link to={`/contact/0`} className='text-light text-decoration-none'>
                                     Contact
                                 </Link>
                             </button>
