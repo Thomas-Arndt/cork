@@ -5,17 +5,15 @@ import {
   Route
 } from 'react-router-dom';
 import AllAds from './components/adBrowse/AllAds';
-import StickyNote from './components/adBrowse/StickyNote';
 
-import AdDetails from './components/adDetails/AdDetails';
 import FilterBar from './components/navigation/FilterBar'
-import EditAdForm from './components/editCreateAdForms/EditAdForm';
-import NewAdForm from './components/editCreateAdForms/NewAdForm';
 import TitleNote from './components/navigation/TitleNote';
 import ComponentWithNavigation from './views/ComponentWithNavigation';
 
 import Main from './views/Main';
 import FilterForm from './components/navigation/FilterForm';
+import EditAdForm from './components/editCreateAdForms/EditAdForm';
+import NewAdForm from './components/editCreateAdForms/NewAdForm';
 import SearchBar from './components/navigation/SearchBar';
 import NavButtonsContainer from './components/navigation/NavButtonsContainer';
 import PostAd from './components/navigation/navigationButtons/PostAd';
@@ -44,6 +42,7 @@ function App() {
 
   return (
     <div className="App">
+
       <BrowserRouter>
         <Main>
           <Switch>

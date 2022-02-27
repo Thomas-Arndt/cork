@@ -4,9 +4,9 @@ import styles from './TitleNote.module.css';
 
 const TitleNote = () => {
     return (
-        <div className={styles.paper} >
+        <a href="#" className={styles.paper} >
             <h1 className={styles.title}>Cork</h1>
-        </div>
+        </a>
     )
 }
 
