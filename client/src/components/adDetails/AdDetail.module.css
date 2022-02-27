@@ -12,6 +12,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  position: relative;
 }
 /* advert title */
 .title {
@@ -34,4 +36,30 @@
 .description {
   width: 485px;
   height: auto;
+}
+
+.pin{
+  width: 55px;
+  height: auto;
+  position: absolute;
+}
+
+.pinTL{
+  top: -5px;
+  left: -5px;
+}
+
+.pinTR{
+  top: -5px;
+  right: 10px;
+}
+
+.pinBL{
+  bottom: -5px;
+  left: -5px;
+}
+
+.pinBR{
+  bottom: -5px;
+  right: 10px;
 }

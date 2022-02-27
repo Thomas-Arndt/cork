@@ -22,6 +22,8 @@ import Browse from './components/navigation/navigationButtons/Browse';
 import ContactForm from './components/contactForm/ContactForm';
 import DeleteForm from './components/deleteForm/DeleteForm';
 import Landing from './views/Landing';
+import AdPosted from './components/adPosted/AdPosted';
+import AdDetails from './components/adDetails/AdDetails';
 
 
 
@@ -60,7 +62,7 @@ function App() {
                     <PostAd />
                   </NavButtonsContainer>
                 </FilterBar>
-                <AllAds adList={adList} />
+                <NewAdForm />
               </ComponentWithNavigation>
             </Route>
           </Switch>
