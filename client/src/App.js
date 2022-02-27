@@ -21,6 +21,7 @@ import Back from './components/navigation/navigationButtons/Back';
 import Browse from './components/navigation/navigationButtons/Browse';
 import ContactForm from './components/contactForm/ContactForm';
 import DeleteForm from './components/deleteForm/DeleteForm';
+import Landing from './views/Landing';
 
 
 
@@ -49,18 +50,7 @@ function App() {
         <Main>
           <Switch>
             <Route path='/'>
-              <ComponentWithNavigation >
-                <TitleNote />
-                <FilterBar >
-                  <FilterForm />
-                  <SearchBar />
-                  <NavButtonsContainer >
-                    <PostAd />
-                    <Back />
-                  </NavButtonsContainer>
-                </FilterBar>
-                <AdPosted />
-              </ComponentWithNavigation>
+              <Landing />
             </Route>
           </Switch>
         </Main>
