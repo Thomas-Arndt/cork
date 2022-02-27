@@ -51,8 +51,31 @@ function App() {
       <BrowserRouter>
         <Main>
           <Switch>
-            <Route path='/'>
+            <Route path='/browse'>
               <ComponentWithNavigation >
+                <TitleNote />
+                <FilterBar >
+                  <FilterForm />
+                  <SearchBar />
+                  <PostAd />
+                </FilterBar>
+                <AllAds adList={adList} />
+              </ComponentWithNavigation>
+            </Route>
+            <Route path='/post_ad'>
+            <ComponentWithNavigation >
+                <TitleNote />
+                <FilterBar >
+                  <NavButtonsContainer >
+                    <Back />
+                    <Browse />
+                  </NavButtonsContainer>
+                </FilterBar>
+                <NewAdForm />
+              </ComponentWithNavigation>
+            </Route>
+            <Route path='/details/:adId'>
+            <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
                   <FilterForm />
@@ -62,8 +85,23 @@ function App() {
                     <PostAd />
                   </NavButtonsContainer>
                 </FilterBar>
-                <NewAdForm />
+                <AdDetails />
               </ComponentWithNavigation>
+            </Route>
+            <Route path='/edit_ad/:adId'>
+            <ComponentWithNavigation >
+                <TitleNote />
+                <FilterBar >
+                  <NavButtonsContainer >
+                    <Back />
+                    <Browse />
+                  </NavButtonsContainer>
+                </FilterBar>
+                <EditAdForm />
+              </ComponentWithNavigation>
+            </Route>
+            <Route path='/'>
+              <Landing />
             </Route>
           </Switch>
         </Main>
