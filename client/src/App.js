@@ -18,7 +18,9 @@ import SearchBar from './components/navigation/SearchBar';
 import NavButtonsContainer from './components/navigation/NavButtonsContainer';
 import PostAd from './components/navigation/navigationButtons/PostAd';
 import Back from './components/navigation/navigationButtons/Back';
-import AdDetails from './components/adDetails/AdDetails'
+import Browse from './components/navigation/navigationButtons/Browse';
+import ContactForm from './components/contactForm/ContactForm';
+
 
 function App() {
 
@@ -45,18 +47,7 @@ function App() {
         <Main>
           <Switch>
             <Route path='/'>
-              <ComponentWithNavigation >
-                <TitleNote />
-                <FilterBar>
-                  <FilterForm />
-                  <SearchBar />
-                  <NavButtonsContainer>
-                    <PostAd />
-                    <Back />
-                  </NavButtonsContainer>
-                </FilterBar>
-                <AllAds adList={adList} />
-              </ComponentWithNavigation>
+              <ContactForm />
             </Route>
           </Switch>
         </Main>
