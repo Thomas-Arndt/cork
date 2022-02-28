@@ -84,7 +84,7 @@ const NewAdForm = () => {
                         <select onChange={(e) => setCategory(e.target.value)} value={category} name="category" className="form-control">
                             <option value="">Choose a Category</option>
                             {categories.map((category, i) => 
-                                <option value={category}>{category}</option>
+                                <option key={i} value={category}>{category}</option>
                             )}
                         </select>
                     </div>
@@ -111,7 +111,7 @@ const NewAdForm = () => {
                             <select onChange={(e) => setState(e.target.value)} value={state} name="state" className="form-control">
                                 <option value="">--</option>
                                 {states.map((state, i) =>
-                                    <option value={state}>{state}</option>
+                                    <option key={i} value={state}>{state}</option>
                                 )}
                             </select>
                         </div>
