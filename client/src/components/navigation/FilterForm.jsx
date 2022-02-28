@@ -32,7 +32,7 @@ const FilterForm = () => {
                         <select name="category" className=" ">
                             <option value="">Choose a Category</option>
                             {categories.map((category, i) => 
-                                <option value={category}>{category}</option>
+                                <option key={i} value={category}>{category}</option>
                             )}
                         </select>
             </div>
