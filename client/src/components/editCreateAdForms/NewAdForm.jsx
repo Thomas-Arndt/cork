@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import styles from "./NewAdForm.module.css";
 import pushPin from '../../static/images/drawing-pin.png'
 
+import adService from '../../services/AdService'
+
 const NewAdForm = () => {
     const history = useHistory();
     const [ title, setTitle ] = useState('');
@@ -49,6 +51,17 @@ const NewAdForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const formData = {
+            title: title,
+            price: price,
+            category: category,
+            description: description,
+            image: image,
+            city: city,
+            state: state,
+            email: email
+        }
+        adService.createAd(formData);
 
         history.push('/posted/0');
     }
@@ -60,15 +73,15 @@ const NewAdForm = () => {
                 <div className="d-flex justify-content-between" >
                     <div className="d-flex flex-column">
                         <label for="title" >Posting Title</label>
-                        <input type="text" name="title" className="form-control" />
+                        <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" className="form-control" />
                     </div>
                     <div className="d-flex flex-column col-2">
                         <label for="price" >Asking Price</label>
-                        <input type="number" name="price" inputMode="decimal" step="0.01" value="0.00" className="form-control" />
+                        <input onChange={(e) => setPrice(e.target.value)} value={price} type="number" name="price" inputMode="decimal" step="0.01" className="form-control" />
                     </div>
                     <div className="d-flex flex-column">
                         <label for="category" >Category</label>
-                        <select name="category" className="form-control">
+                        <select onChange={(e) => setCategory(e.target.value)} value={category} name="category" className="form-control">
                             <option value="">Choose a Category</option>
                             {categories.map((category, i) => 
                                 <option value={category}>{category}</option>
@@ -78,7 +91,7 @@ const NewAdForm = () => {
                 </div>
                 <div className="d-flex flex-column">
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" cols="30" rows="10" className="form-control" ></textarea>
+                    <textarea onChange={(e) => setDescription(e.target.value)} value={description} name="description" id="description" cols="30" rows="10" className="form-control" ></textarea>
                 </div>
                 <div className="d-flex gap-3">
                     <div>
@@ -91,11 +104,11 @@ const NewAdForm = () => {
                     <div>
                         <div className="d-flex flex-column">
                             <label for="city" >City</label>
-                            <input type="text" name="city" className="form-control" />
+                            <input onChange={(e) => setCity(e.target.value)} value={city} type="text" name="city" className="form-control" />
                         </div>
                         <div>
                             <label for="state">State</label>
-                            <select name="state" className="form-control">
+                            <select onChange={(e) => setState(e.target.value)} value={state} name="state" className="form-control">
                                 <option value="">--</option>
                                 {states.map((state, i) =>
                                     <option value={state}>{state}</option>
@@ -104,7 +117,7 @@ const NewAdForm = () => {
                         </div>
                         <div>
                             <label for="email" >Email</label>
-                            <input type="email" name="email" className="form-control" />
+                            <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" name="email" className="form-control" />
                         </div>
                         <input type="submit" value="Post Ad!" className="btn btn-secondary mt-3" />
                     </div>
