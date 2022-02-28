@@ -24,6 +24,7 @@ import DeleteForm from './components/deleteForm/DeleteForm';
 import Landing from './views/Landing';
 import AdPosted from './components/adPosted/AdPosted';
 import AdDetails from './components/adDetails/AdDetails';
+import Spacer from './components/navigation/navigationButtons/Spacer';
 
 
 
@@ -68,10 +69,12 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
+                  <Spacer />
                   <NavButtonsContainer >
                     <Back />
                     <Browse />
                   </NavButtonsContainer>
+                  <Spacer />
                 </FilterBar>
                 <NewAdForm />
               </ComponentWithNavigation>
@@ -106,10 +109,12 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
+                  <Spacer />
                   <NavButtonsContainer >
                     <Back />
                     <Browse />
                   </NavButtonsContainer>
+                  <Spacer />
                 </FilterBar>
                 <ContactForm />
               </ComponentWithNavigation>
@@ -130,10 +135,12 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
+                  <Spacer />
                   <NavButtonsContainer >
                     <Browse />
                     <PostAd />
                   </NavButtonsContainer>
+                  <Spacer />
                 </FilterBar>
                 <AdPosted />
               </ComponentWithNavigation>
