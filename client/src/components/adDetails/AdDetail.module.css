@@ -17,6 +17,7 @@
 }
 /* advert title */
 .title {
+  text-align: center;
   font-family: Redressed, serif;
   font-size: 48px;
   color: black;
@@ -39,6 +40,13 @@
   height: auto;
   margin-bottom: 25px;
   word-wrap: break-word;
+}
+
+.image{
+  width: 250px;
+  height: auto;
+  border: 1px solid black;
+  border-radius: 20px;
 }
 
 .pin {
