@@ -82,15 +82,15 @@ const NewAdForm = () => {
             <form onSubmit={handleSubmit}>
                 <div className="d-flex justify-content-between" >
                     <div className="d-flex flex-column">
-                        <label for="title" >Posting Title</label>
+                        <label>Posting Title</label>
                         <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" className="form-control" />
                     </div>
                     <div className="d-flex flex-column col-2">
-                        <label for="price" >Asking Price</label>
+                        <label>Asking Price</label>
                         <input onChange={(e) => setPrice(e.target.value)} value={price} type="number" name="price" inputMode="decimal" step="0.01" className="form-control" />
                     </div>
                     <div className="d-flex flex-column">
-                        <label for="category" >Category</label>
+                        <label>Category</label>
                         <select onChange={(e) => setCategory(e.target.value)} value={category} name="category" className="form-control">
                             <option value="">Choose a Category</option>
                             {categories.map((category, i) => 
@@ -100,12 +100,12 @@ const NewAdForm = () => {
                     </div>
                 </div>
                 <div className="d-flex flex-column">
-                    <label for="description">Description</label>
+                    <label>Description</label>
                     <textarea onChange={(e) => setDescription(e.target.value)} value={description} name="description" id="description" cols="30" rows="10" className="form-control" ></textarea>
                 </div>
                 <div className="d-flex gap-3">
                     <div>
-                        <label for="image">Upload Image</label>
+                        <label>Upload Image</label>
                         <div className="d-flex flex-column align-items-center border p-3 bg-white" >
                             <input type="file" name="image" onChange={handleImage} className="form-control" />
                             {imagePreview && <img src={imagePreview} className={`col-12 p-3 mt-3 ${styles.preview}`} />}
@@ -113,11 +113,11 @@ const NewAdForm = () => {
                     </div>
                     <div>
                         <div className="d-flex flex-column">
-                            <label for="city" >City</label>
+                            <label>City</label>
                             <input onChange={(e) => setCity(e.target.value)} value={city} type="text" name="city" className="form-control" />
                         </div>
                         <div>
-                            <label for="state">State</label>
+                            <label>State</label>
                             <select onChange={(e) => setState(e.target.value)} value={state} name="state" className="form-control">
                                 <option value="">--</option>
                                 {states.map((state, i) =>
@@ -126,7 +126,7 @@ const NewAdForm = () => {
                             </select>
                         </div>
                         <div>
-                            <label for="email" >Email</label>
+                            <label>Email</label>
                             <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" name="email" className="form-control" />
                         </div>
                         <input type="submit" value="Post Ad!" className="btn btn-secondary mt-3" />

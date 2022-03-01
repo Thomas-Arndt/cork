@@ -3,8 +3,8 @@ import axiosService from './AxiosService.jsx';
 
 class AdService {
     
-    getAllAds(){
-        return axiosService.getRestClient().get("/allAds")
+    getAllAds(category){
+        return axiosService.getRestClient().get(`/allAds/${category}`)
     }
 
     getOneAd(id){
