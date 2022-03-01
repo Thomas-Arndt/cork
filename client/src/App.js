@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter,
   Switch,
@@ -9,7 +9,6 @@ import AllAds from './components/adBrowse/AllAds';
 import FilterBar from './components/navigation/FilterBar'
 import TitleNote from './components/navigation/TitleNote';
 import ComponentWithNavigation from './views/ComponentWithNavigation';
-
 import Main from './views/Main';
 import FilterForm from './components/navigation/FilterForm';
 import EditAdForm from './components/editCreateAdForms/EditAdForm';
@@ -29,22 +28,8 @@ import Spacer from './components/navigation/navigationButtons/Spacer';
 
 
 function App() {
+  const [ adList, setAdList ] = useState([]);
 
-  const adList = [
-    { image: "#", title: "Advertisement Title", price: 100.00 },
-    { image: "#", title: "Advertisement Title2", price: 100.00 },
-    { image: "#", title: "Advertisement Title3", price: 100.00 },
-    { image: "#", title: "Advertisement Title4", price: 100.00 },
-    { image: "#", title: "Advertisement Title5", price: 100.00 },
-    { image: "#", title: "Advertisement Title6", price: 100.00 },
-    { image: "#", title: "Advertisement Title7", price: 100.00 },
-    { image: "#", title: "Advertisement Title8", price: 100.00 },
-    { image: "#", title: "Advertisement Title9", price: 100.00 },
-    { image: "#", title: "Advertisement Title10", price: 100.00 },
-    { image: "#", title: "Advertisement Title11", price: 100.00 },
-    { image: "#", title: "Advertisement Title12", price: 100.00 },
-    { image: "#", title: "Advertisement Title13", price: 100.00 }
-  ];
 
   return (
     <div className="App">
@@ -56,7 +41,7 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                  <FilterForm />
+                  <FilterForm setAdList={setAdList} />
                   <SearchBar />
                   <NavButtonsContainer >
                     <PostAd />
@@ -83,7 +68,7 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                  <FilterForm />
+                  <FilterForm setAdList={setAdList} />
                   <SearchBar />
                   <NavButtonsContainer >
                     <Back />
@@ -97,10 +82,12 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
+                  <Spacer />
                   <NavButtonsContainer >
                     <Browse />
                     <PostAd />
                   </NavButtonsContainer>
+                  <Spacer />
                 </FilterBar>
                 <EditAdForm />
               </ComponentWithNavigation>
@@ -123,10 +110,12 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
+                  <Spacer />
                   <NavButtonsContainer >
                     <Browse />
                     <PostAd />
                   </NavButtonsContainer>
+                  <Spacer />
                 </FilterBar>
                 <DeleteForm />
               </ComponentWithNavigation>
