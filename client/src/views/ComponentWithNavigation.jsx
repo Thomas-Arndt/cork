@@ -4,7 +4,6 @@ import styles from './ComponentWithNavigation.module.css';
 // Takes 3 child components and displays the first two in a 'navigation' column on the left side of the page, and centers the third ad the main component on the right.
 
 const ComponentWithNavigation = ({children}) => {
-    console.log(children);
     return (
         <div className={styles.background}>
             <div className={styles.wrapper}>

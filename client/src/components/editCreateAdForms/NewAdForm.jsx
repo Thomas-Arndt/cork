@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import adService from '../../services/AdService';
+import fileService from '../../services/FileService';
 import styles from "./NewAdForm.module.css";
 import pushPin from '../../static/images/drawing-pin.png'
 
-import adService from '../../services/AdService'
 
 const NewAdForm = () => {
     const history = useHistory();
@@ -11,7 +12,7 @@ const NewAdForm = () => {
     const [ price, setPrice ] = useState(0.00);
     const [ category, setCategory ] = useState('');
     const [ description, setDescription ] = useState('');
-    const [ image, setImage ] = useState();
+    const [ image, setImage ] = useState('');
     const [ imagePreview, setImagePreview ] = useState();
     const [ city, setCity ] = useState('');
     const [ state, setState ] = useState('');
@@ -33,14 +34,16 @@ const NewAdForm = () => {
         "VA", "WA", "WV", "WI", "WY"
     ]
 
-    const handlePreview = (e) => {
+    const handleImage = (e) => {
         if(e.target.files.length === 0) {
             setImagePreview('');
+            setImage('');
             return;
         }
 
         let file = e.target.files[0];
         let reader = new FileReader();
+        setImage(e.target.files[0]);
 
         reader.onloadend = (e) => {
             setImagePreview(reader.result);
@@ -51,19 +54,26 @@ const NewAdForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const formData = {
-            title: title,
-            price: price,
-            category: category,
-            description: description,
-            image: image,
-            city: city,
-            state: state,
-            email: email
-        }
-        adService.createAd(formData);
-
-        history.push('/posted/0');
+        fileService.uploadFile(image)
+        .then(response => {
+            console.log(response.data);
+            const formData = {
+                title: title,
+                price: price,
+                category: category,
+                description: description,
+                image: response.data.filePath,
+                city: city,
+                state: state,
+                email: email
+            }
+            adService.createAd(formData)
+                .then(response => {
+                    let newAd = response.data
+                    history.push(`/posted/${newAd.id}`);
+                })
+        })
+        
     }
 
     return (
@@ -97,7 +107,7 @@ const NewAdForm = () => {
                     <div>
                         <label for="image">Upload Image</label>
                         <div className="d-flex flex-column align-items-center border p-3 bg-white" >
-                            <input type="file" name="image" onChange={handlePreview} className="form-control" />
+                            <input type="file" name="image" onChange={handleImage} className="form-control" />
                             {imagePreview && <img src={imagePreview} className={`col-12 p-3 mt-3 ${styles.preview}`} />}
                         </div>
                     </div>

@@ -1,8 +1,10 @@
 import React from 'react';
+import adService from '../../services/AdService';
 import StickyNote from './StickyNote';
 import styles from './AllAds.module.css';
 
 const AllAds = ({ adList }) => {
+
     return (
         <div className={styles.mappedAds}>
             {adList.map((ad, i) =>

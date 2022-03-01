@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import adService from '../../services/AdService';
 
 
 
-const FilterForm = () => {
+const FilterForm = ({ setAdList }) => {
     const [ category, setCategory ] = useState('');
     const [ min, setMin ] = useState('');
     const [ max, setMax ] = useState('');
@@ -18,7 +19,12 @@ const FilterForm = () => {
         "household items", "jewelry", "materials", "motorcycles", "musical instruments",
         "photo/video", "rvs/camp", "sporting", "tickets", "tools", "toys/games", "trailers",
         "trailers", "video gaming"
-    ]
+    ];
+
+    useEffect(() => {
+        adService.getAllAds()
+            .then(response => setAdList(response.data))
+    }, []);
 
 
 
