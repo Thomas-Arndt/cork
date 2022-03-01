@@ -33,9 +33,9 @@ public class AdController {
     @Autowired
     private AdService adService;
 
-    @GetMapping("/allAds")
-    public List<Ad> allAds() {
-        return adService.allAds();
+    @GetMapping("/allAds/{category}")
+    public List<Ad> allAds(@PathVariable("category") String category) {
+        return adService.allAds(category);
     }
 
     @GetMapping("/oneAd/{id}")
@@ -55,7 +55,7 @@ public class AdController {
     @PostMapping("/uploadImage")
     public ResponseEntity<Map<String, String>> uploadImage(@RequestParam("file") MultipartFile file) {
         UUID guid = UUID.randomUUID();
-        File absolutePath = new File("/home/bebop/Coding/CodingDojo/projects/java/cork/client/src/static/images/"+guid+file.getOriginalFilename());
+        File absolutePath = new File("/home/bebop/Coding/CodingDojo/projects/java/cork/client/src/static/images/adImages/"+guid+file.getOriginalFilename());
         String fileName = guid+file.getOriginalFilename();
         try{
             file.transferTo(absolutePath);
@@ -64,6 +64,18 @@ public class AdController {
         }
         Map<String, String> response = new HashMap<>();
         response.put("filePath", fileName);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/deleteImage/{fileName}")
+    public ResponseEntity<Map<String, Boolean>> deleteImage(@PathVariable("fileName") String fileName) {
+        File fileToDelete = new File("/home/bebop/Coding/CodingDojo/projects/java/cork/client/src/static/images/adImages/"+fileName);
+        Map<String, Boolean> response = new HashMap<>();
+        if(fileToDelete.delete()) {
+            response.put("deleted", Boolean.TRUE);
+        } else {
+            response.put("deleted", Boolean.FALSE);
+        }
         return ResponseEntity.ok(response);
     }
 
@@ -80,7 +92,6 @@ public class AdController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
-
     }
 
 }
