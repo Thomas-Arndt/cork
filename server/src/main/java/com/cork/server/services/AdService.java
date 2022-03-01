@@ -10,7 +10,6 @@ import com.cork.server.models.Ad;
 import com.cork.server.repositories.AdRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
