@@ -23,8 +23,13 @@ public class AdService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public List<Ad> allAds() {
-        return adRepo.findAll();
+    public List<Ad> allAds(String category) {
+        System.out.println(category);
+        if(category.equals("all")) {
+            return adRepo.findAll();
+        } else {
+            return adRepo.findByCategory(category); 
+        }
     }
 
     public Ad oneAd(Long id) {
@@ -78,7 +83,14 @@ public class AdService {
     }
 
     public Ad updateAd(Ad ad) {
-        return adRepo.save(ad);
+        Optional<Ad> dbAd = adRepo.findById(ad.getId());
+        if(dbAd.isPresent()) {
+            System.out.println("Found");
+            ad.setEmail(dbAd.get().getEmail());
+            return adRepo.save(ad);
+        } else {
+            return null;
+        }
     }
 
     public void deleteAd(Long id) {
