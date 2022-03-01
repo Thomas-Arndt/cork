@@ -1,14 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './DeleteForm.module.css'
 import pushPin from '../../static/images/drawing-pin.png';
-import { useHistory } from 'react-router-dom'
+import { useHistory,useParams } from 'react-router-dom'
+
+import AdService from '../../services/AdService'
 
 
 
 const DeleteForm = () => {
     const history = useHistory()
+    const { adId } = useParams()
     const [disabled, setDisabled] = useState(true)
+    const [ad, setAd] = useState('')
 
+
+    useEffect(() => {
+        AdService.getOneAd(adId)
+        .then(response => {
+            console.log(response);
+            setAd(response.data)
+        })
+        .catch(error => console.error(error));
+    }, [])
 
 
     const handleChange = (e) => {
@@ -20,9 +33,9 @@ const DeleteForm = () => {
     }
 
     const submitHandler = (e) => {
-        e.preventDefault();
-
-        history.push('/')
+        e.preventDefault()
+        AdService.deleteAd(adId)
+        history.push('/browse')
     }
 
 
@@ -30,7 +43,7 @@ const DeleteForm = () => {
 
     <div className={`d-flex flex-column align-items-center p-4 ${styles.paper}`} >
         <h2 className='mt-2'>Are you sure you want to delete your Ad?</h2>
-        <h4 className={styles.title}>Advertisement Title</h4>
+        <h4 className={styles.title}>{ad.title}</h4>
         <div className={`d-flex justify-content-center mt-3 p-3 ${styles.container}`} >
             <form onSubmit={submitHandler}>
                 <div>

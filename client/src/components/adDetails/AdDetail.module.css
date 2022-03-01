@@ -34,32 +34,35 @@
 }
 
 .description {
+  margin: 0 auto;
   width: 485px;
   height: auto;
+  margin-bottom: 25px;
+  word-wrap: break-word;
 }
 
-.pin{
+.pin {
   width: 55px;
   height: auto;
   position: absolute;
 }
 
-.pinTL{
+.pinTL {
   top: -5px;
   left: -5px;
 }
 
-.pinTR{
+.pinTR {
   top: -5px;
   right: 10px;
 }
 
-.pinBL{
+.pinBL {
   bottom: -5px;
   left: -5px;
 }
 
-.pinBR{
+.pinBR {
   bottom: -5px;
   right: 10px;
 }
