@@ -12,7 +12,7 @@ import Loader from '../navigation/navigationButtons/Loader';
 const AdDetails = () => {
     const { adId } = useParams();
     const [ad, setAd] = useState();
-    console.log(ad);
+    const [ image, setImage ] = useState();
 
 
     useEffect(() => {
@@ -20,6 +20,7 @@ const AdDetails = () => {
         .then(response => {
             console.log(response.data)
             setAd(response.data)
+            setImage(require(`../../static/images/adImages/${response.data.image}`));
         })
         .catch(error => console.error(error))
     }, [])
@@ -37,8 +38,8 @@ const AdDetails = () => {
         
                             <div className='d-flex mt-1 p-3 gap-5' style={{width: '550px', height: '350px'}}>
                                 <div className='d-flex  p-3'>
-                                    <div className='border border-black rounded-3' style={{width: '250px', height: '250px', backgroundColor:'white'}}>
-                                        <img src="na" alt="image" />
+                                    <div className='d-flex align-items-start'>
+                                        <img src={image} alt="image" className={styles.image} />
                                     </div>
                                 </div>
                                 <div className={`d-flex flex-column `}>
