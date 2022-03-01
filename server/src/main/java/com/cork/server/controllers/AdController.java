@@ -35,7 +35,7 @@ public class AdController {
     @GetMapping("/oneAd/{id}")
     public ResponseEntity<Ad> oneAd(@PathVariable("id") Long id) {
         Ad ad = adService.oneAd(id);
-
+        ad.setEmail(null);
         return ResponseEntity.ok(ad);
     }
 
