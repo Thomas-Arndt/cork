@@ -8,5 +8,9 @@ class FileService {
         return axiosService.getRestClient().post('/uploadImage', data)
     }
 
+    deleteFile(fileName) {
+        return axiosService.getRestClient().delete(`/deleteImage/${fileName}`)
+    }
+
 }
 export default (new FileService());
