@@ -5,14 +5,15 @@ class AdService {
     
     getAllAds(){
         return axiosService.getRestClient().get("/allAds")
-            .then(response => console.log(response.data))
-            .catch(error => console.log(error))
+            // .then(response => console.log(response.data))
+            // .catch(error => console.log(error))
     }
 
-    getoneAd(id){
+    getOneAd(id){
         return axiosService.getRestClient().get(`/oneAd/${id}`)
-            .then(response => console.log(response.data))
-            .catch(error => console.log(error))
+            // .then(response => console.log(response.data))
+            // .catch(error => console.log(error))
+            // **data returned as undefined with Promise after the return
     }
 
     createAd(data){
