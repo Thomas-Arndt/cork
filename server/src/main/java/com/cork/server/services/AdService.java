@@ -28,7 +28,8 @@ public class AdService {
     }
 
     public Ad createAd(Ad ad) {
-        return adRepo.save(ad);
+        Ad newAd = adRepo.save(ad);
+        return newAd;
     }
 
     public Ad updateAd(Ad ad) {
