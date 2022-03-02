@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import adService from '../../services/AdService';
 import fileService from '../../services/FileService';
+import Loader from '../navigation/navigationButtons/Loader';
 import styles from "./EditAdForm.module.css";
 import pushPin from '../../static/images/drawing-pin.png';
 
 const EditAdForm = () => {
     const history = useHistory();
     const { adId } = useParams();
+    const [ isSubmitted, setIsSubmitted ] = useState(false);
     const [ title, setTitle ] = useState('');
     const [ price, setPrice ] = useState(0.00);
     const [ category, setCategory ] = useState('');
@@ -78,6 +80,7 @@ const EditAdForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsSubmitted(true);
         if(previousImage) {
             fileService.deleteFile(previousImage)
             fileService.uploadFile(image)
@@ -170,7 +173,9 @@ const EditAdForm = () => {
                                 )}
                             </select>
                         </div>
-                        <input type="submit" value="Update Ad" className="btn btn-secondary mt-3" />
+                        {!isSubmitted ?
+                        <input type="submit" value="Update Ad" className="btn btn-secondary mt-3" /> :
+                        <div className="mt-3"><Loader /> Submitting...</div>}
                     </div>
                 </div>
             </form>
