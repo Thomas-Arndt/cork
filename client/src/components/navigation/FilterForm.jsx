@@ -13,11 +13,11 @@ const FilterForm = ({ setAdList }) => {
 
 
     const categories = [
-        "antiques", "appliances", "arts/crafts", "barter", "bikes", "boats",
-        "books", "business", "cars/trucks", "cds/dvds/vhs", "clothes", "collectibles",
-        "computers", "electronics", "farm/garden", "free", "furniture", "heavy equipment",
+        "antiques", "appliances", "arts+crafts", "barter", "bikes", "boats",
+        "books", "business", "cars+trucks", "cds+dvds+vhs", "clothes", "collectibles",
+        "computers", "electronics", "farm+garden", "free", "furniture", "heavy equipment",
         "household items", "jewelry", "materials", "motorcycles", "musical instruments",
-        "photo/video", "rvs/camp", "sporting", "tickets", "tools", "toys/games", "trailers",
+        "photo+video", "rvs+camp", "sporting", "tickets", "tools", "toys+games", "trailers",
         "trailers", "video gaming"
     ];
 

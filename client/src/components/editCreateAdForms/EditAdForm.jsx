@@ -14,17 +14,18 @@ const EditAdForm = () => {
     const [ description, setDescription ] = useState('');
     const [ image, setImage ] = useState();
     const [ imagePreview, setImagePreview ] = useState();
+    const [ imageError, setImageError ] = useState(null);
     const [ previousImage, setPreviousImage ] = useState('');
     const [ city, setCity ] = useState('');
     const [ state, setState ] = useState('');
     const [ email, setEmail ] = useState('');
 
     const categories = [
-        "antiques", "appliances", "arts/crafts", "barter", "bikes", "boats",
-        "books", "business", "cars/trucks", "cds/dvds/vhs", "clothes", "collectibles",
-        "computers", "electronics", "farm/garden", "free", "furniture", "heavy equipment",
+        "antiques", "appliances", "arts+crafts", "barter", "bikes", "boats",
+        "books", "business", "cars+trucks", "cds+dvds+vhs", "clothes", "collectibles",
+        "computers", "electronics", "farm+garden", "free", "furniture", "heavy equipment",
         "household items", "jewelry", "materials", "motorcycles", "musical instruments",
-        "photo/video", "rvs/camp", "sporting", "tickets", "tools", "toys/games", "trailers",
+        "photo+video", "rvs+camp", "sporting", "tickets", "tools", "toys+games", "trailers",
         "trailers", "video gaming"
     ]
 
@@ -61,13 +62,18 @@ const EditAdForm = () => {
 
         let file = e.target.files[0];
         let reader = new FileReader();
-        setImage(e.target.files[0]);
-
-        reader.onloadend = (e) => {
-            setImagePreview(reader.result);
+        if(Math.round(file.size/1024) > 4096) {
+            setImageError("File cannot be more than 4MB")
+        } else {
+            setImageError(null);
+            setImage(e.target.files[0]);
+    
+            reader.onloadend = (e) => {
+                setImagePreview(reader.result);
+            }
+    
+            reader.readAsDataURL(file);
         }
-
-        reader.readAsDataURL(file);
     }
 
     const handleSubmit = (e) => {
@@ -146,6 +152,7 @@ const EditAdForm = () => {
                         <label>Upload Image</label>
                         <div className="d-flex flex-column align-items-center border p-3 bg-white" >
                             <input type="file" name="image" onChange={handleImage} className="form-control" />
+                            {imageError && <p className="alert alert-danger mt-1">{imageError}</p>}
                             {imagePreview && <img src={imagePreview} className={`col-12 p-3 mt-3 ${styles.preview}`} />}
                         </div>
                     </div>
