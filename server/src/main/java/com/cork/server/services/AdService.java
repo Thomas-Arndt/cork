@@ -49,6 +49,7 @@ public class AdService {
         String state = newAd.getState();
         String description = newAd.getDescription();
         String email = newAd.getEmail();
+        Long adId = newAd.getId();
 
         String from = "cork.noreply@gmail.com";
         String to = email;
@@ -70,13 +71,19 @@ public class AdService {
                     "    <title>Email</title>\n" +
                     "</head>\n" +
                     "<body>\n" +
-                    "<h2 align='center' style='text-decoration: underline'><b>Ad Title:</b></h2>" +
-                    "<h2 align='center'>" + title + "</h2>" +
-                    "\n" +
-                    "<img src='cid:adImage' align='center' />" +
-                    "<div align='center'><span>$" + price + "</span><span>" + city + ",</span><span>" + state
-                    + "</span></div>\n" +
-                    "<div align='center' style='display:flex'>" + description + "</div>" +
+                    "<h2 align='center' style=''>Would you like to change or delete your listing?</h2>" +
+                    "<h2 align='center' style='display: flex; justify-content: space-around; width: 100px; '><a href='http://localhost:3000/details/"
+                    + adId + "'>View Your Listing</a><p></p><a href='http://localhost:3000/edit_ad/"
+                    + adId + "'>Edit</a><p></p><a href='http://localhost:3000/delete/"
+                    + adId + "'>Delete</a></h2>"
+                    +
+                    "<h2 align='center' style=''>" + title + "</h2>" +
+                    "<h3 align='center' style=''>Price: " + price + "</h3>" +
+                    "<h3 align='center' style=''>Location: " + city + ", " + state + "</h3>" +
+                    "<h3 align='center' style='display:flex; flex-wrap: wrap; justify-content:center; width: 100px; margin-top: 35px; border: 1px solid black; border-radius: 5px; padding: 10px'>"
+                    + description + "</h3>" +
+                    "<p><img align='center' src='cid:adImage' style='width: 250px; height: auto;' /></p>" +
+
                     "</body>\n" +
                     "</html>\n";
 
@@ -85,15 +92,15 @@ public class AdService {
             helper.setSubject(mailSubject);
             helper.setText(mailContent, true);
 
-            DataSource loadImage = new FileDataSource(
+            DataSource adImage = new FileDataSource(
                     "C:\\Users\\Rangel\\Desktop\\cork\\client\\src\\static\\images\\adImages" + image);
-            helper.addInline("adImage", loadImage);
+            helper.addInline("adImage", adImage);
 
             System.out.println(message);
             mailSender.send(message);
 
         } catch (MessagingException me) {
-            System.out.println("Error");
+            System.out.println(me);
         }
 
         return newAd;

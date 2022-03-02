@@ -55,9 +55,10 @@ public class AdController {
     @PostMapping("/uploadImage")
     public ResponseEntity<Map<String, String>> uploadImage(@RequestParam("file") MultipartFile file) {
         UUID guid = UUID.randomUUID();
-        File absolutePath = new File("/home/bebop/Coding/CodingDojo/projects/java/cork/client/src/static/images/"+guid+file.getOriginalFilename());
-        String fileName = guid+file.getOriginalFilename();
-        try{
+        File absolutePath = new File("C:\\Users\\Rangel\\Desktop\\cork\\client\\src\\static\\images\\adImages" + guid
+                + file.getOriginalFilename());
+        String fileName = guid + file.getOriginalFilename();
+        try {
             file.transferTo(absolutePath);
         } catch (IOException ioe) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
