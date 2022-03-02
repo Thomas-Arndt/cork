@@ -3,12 +3,11 @@ import adService from '../../services/AdService';
 
 
 
-const FilterForm = ({ setAdList }) => {
-    const [ category, setCategory ] = useState('all');
+const FilterForm = ({ setAdList, category, setCategory }) => {
     const [ min, setMin ] = useState('');
     const [ max, setMax ] = useState('');
-    const [ hasImage, setHasImage ] = useState('');
-    const [ postedToday, setPostedToday ] = useState('');
+    const [ hasImage, setHasImage ] = useState(false);
+    const [ postedToday, setPostedToday ] = useState(false);
 
 
 
@@ -25,13 +24,34 @@ const FilterForm = ({ setAdList }) => {
         console.log(category);
         adService.getAllAds(category)
             .then(response => setAdList(response.data))
-    }, [category]);
+    }, []);
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        adService.getAllAds(category)
+            .then(response => {
+                let tempList = [...response.data];
+                if(min && min > 0) {
+                    tempList = tempList.filter( ad => ad.price >= min);
+                }
+                if(max && max > 0) {
+                    tempList = tempList.filter( ad => ad.price <= max);
+                }
+                if(hasImage) {
+                    tempList = tempList.filter( ad => ad.image !== null);
+                }
+                if(postedToday) {
+                    const today = new Date();
+                    tempList = tempList.filter( ad => new Date(ad.createdAt).getDay() === today.getDay())
+                }
+                setAdList(tempList);
+            })
+    }
 
   return (
 
-
     <div className='container d-flex flex-column align-items-center px-3 pt-3'>
-        <form className='d-flex flex-column gap-2'>
+        <form onSubmit={handleSubmit} className='d-flex flex-column gap-2'>
             <div className="d-flex flex-column">
                         <label>Category</label>
                         <select onChange={(e) => setCategory(e.target.value)} value={category} name="category">
@@ -44,17 +64,17 @@ const FilterForm = ({ setAdList }) => {
             <div className=''>
                 <label>Price</label>
                 <div className='d-flex gap-3 '>
-                    <input type='number' className='form-control p-0 px-2' placeholder='min' />
-                    <input type='number' className='form-control p-0 px-2' placeholder='max' />
+                    <input onChange={(e)=>setMin(e.target.value)} value={min} type='number' className='form-control p-0 px-2' placeholder='min' />
+                    <input onChange={(e)=>setMax(e.target.value)} value={max} type='number' className='form-control p-0 px-2' placeholder='max' />
                 </div>
             </div>
             <div className='mb-2'>
                 <div>
-                    <input type="checkbox" id="hasImage" name="hasImage" value="" />
-                    <label className='mx-3'>Has Image</label>
+                    <input onChange={()=>setHasImage(!hasImage)} checked={hasImage} type="checkbox" id="hasImage" name="hasImage" value="" />
+                    <label on className='mx-3'>Has Image</label>
                 </div>
                 <div >
-                    <input type="checkbox" id="postedToday" name="postedToday" value="" />
+                    <input onChange={()=>setPostedToday(!postedToday)} checked={postedToday} type="checkbox" id="postedToday" name="postedToday" value="" />
                     <label className='mx-3'>Posted Today</label>
                 </div>
             </div>

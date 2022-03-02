@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import adService from '../../services/AdService';
 import fileService from '../../services/FileService';
+import Loader from '../navigation/navigationButtons/Loader';
 import styles from "./NewAdForm.module.css";
 import pushPin from '../../static/images/drawing-pin.png'
 
 
 const NewAdForm = () => {
     const history = useHistory();
+    const [ isSubmitted, setIsSubmitted ] = useState(false);
     const [ title, setTitle ] = useState('');
     const [ price, setPrice ] = useState(0.00);
     const [ category, setCategory ] = useState('');
@@ -63,6 +65,7 @@ const NewAdForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsSubmitted(true);
         fileService.uploadFile(image)
         .then(response => {
             console.log(response.data);
@@ -139,7 +142,9 @@ const NewAdForm = () => {
                             <label>Email</label>
                             <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" name="email" className="form-control" />
                         </div>
-                        <input type="submit" value="Post Ad!" className="btn btn-secondary mt-3" />
+                        {!isSubmitted ?
+                        <input type="submit" value="Post Ad!" className="btn btn-secondary mt-3" /> :
+                        <div className="mt-3"><Loader /> Submitting...</div>}
                     </div>
                 </div>
             </form>
