@@ -3,6 +3,8 @@ package com.cork.server.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -46,12 +48,13 @@ public class AdService {
 
         // send the automated HTML e-mail
         String title = newAd.getTitle();
-        Double price = newAd.getPrice();
-        String description = newAd.getDescription();
         String image = newAd.getImage();
+        Double price = newAd.getPrice();
         String city = newAd.getCity();
         String state = newAd.getState();
+        String description = newAd.getDescription();
         String email = newAd.getEmail();
+        Long adId = newAd.getId();
 
         String from = "cork.noreply@gmail.com";
         String to = email;
@@ -61,22 +64,48 @@ public class AdService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
             String mailSubject = "Here's you're new Cork Ad listing";
-            String mailContent = "<p><b>Ad Title: </b>" + title + "</p>";
-            mailContent += "<p><b>Description:</b>" + description + "</p>";
-            // mailContent += "<hr><img src='cid:adImage' />";
+
+            String mailContent = "<!doctype html>\n" +
+                    "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"\n" +
+                    "<head>\n" +
+                    "    <meta charset=\"UTF-8\">\n" +
+                    "    <meta name=\"viewport\"\n" +
+                    "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n"
+                    +
+                    "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
+                    "    <title>Email</title>\n" +
+                    "</head>\n" +
+                    "<body>\n" +
+                    "<h2 align='center' style=''>Would you like to change or delete your listing?</h2>" +
+                    "<h2 align='center' style='display: flex; justify-content: space-around; width: 100px; '><a href='http://localhost:3000/details/"
+                    + adId + "'>View Your Listing</a><p></p><a href='http://localhost:3000/edit_ad/"
+                    + adId + "'>Edit</a><p></p><a href='http://localhost:3000/delete/"
+                    + adId + "'>Delete</a></h2>"
+                    +
+                    "<h2 align='center' style=''>" + title + "</h2>" +
+                    "<h3 align='center' style=''>Price: " + price + "</h3>" +
+                    "<h3 align='center' style=''>Location: " + city + ", " + state + "</h3>" +
+                    "<h3 align='center' style='display:flex; flex-wrap: wrap; justify-content:center; width: 100px; margin-top: 35px; border: 1px solid black; border-radius: 5px; padding: 10px'>"
+                    + description + "</h3>" +
+                    "<p><img align='center' src='cid:adImage' style='width: 250px; height: auto;' /></p>" +
+
+                    "</body>\n" +
+                    "</html>\n";
 
             helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject(mailSubject);
             helper.setText(mailContent, true);
-            // ClassPathResource resource = new ClassPathResource("");
-            // helper.addInline("adImage", resource);
 
-            // System.out.println(message);
+            DataSource adImage = new FileDataSource(
+                    "C:\\Users\\Rangel\\Desktop\\cork\\client\\src\\static\\images\\adImages" + image);
+            helper.addInline("adImage", adImage);
+
+            System.out.println(message);
             mailSender.send(message);
 
         } catch (MessagingException me) {
-            System.out.println("Error");
+            System.out.println(me);
         }
 
         return newAd;
