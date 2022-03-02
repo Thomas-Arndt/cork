@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import styles from './DeleteForm.module.css'
+import React, { useEffect, useState } from 'react';
+import styles from './DeleteForm.module.css';
 import pushPin from '../../static/images/drawing-pin.png';
-import { useHistory,useParams } from 'react-router-dom'
-
-import AdService from '../../services/AdService'
+import { useHistory,useParams } from 'react-router-dom';
+import fileService from '../../services/FileService';
+import adService from '../../services/AdService';
 
 
 
@@ -15,7 +15,7 @@ const DeleteForm = () => {
 
 
     useEffect(() => {
-        AdService.getOneAd(adId)
+        adService.getOneAd(adId)
         .then(response => {
             console.log(response);
             setAd(response.data)
@@ -34,7 +34,8 @@ const DeleteForm = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        AdService.deleteAd(adId)
+        fileService.deleteFile(ad.image);
+        adService.deleteAd(adId);
         history.push('/browse')
     }
 
