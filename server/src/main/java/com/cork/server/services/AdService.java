@@ -9,6 +9,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import com.cork.server.models.Ad;
+import com.cork.server.models.ContactMessage;
 import com.cork.server.repositories.AdRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,10 @@ public class AdService {
 
     public List<Ad> allAds(String category) {
         System.out.println(category);
-        if(category.equals("all")) {
+        if (category.equals("all")) {
             return adRepo.findAll();
         } else {
-            return adRepo.findByCategory(category); 
+            return adRepo.findByCategory(category);
         }
     }
 
@@ -98,22 +99,68 @@ public class AdService {
             helper.setText(mailContent, true);
 
             DataSource adImage = new FileDataSource(
-                    "C:\\Users\\Rangel\\Desktop\\cork\\client\\src\\static\\images\\adImages" + image);
+                    "C:\\Users\\Rangel\\Desktop\\cork\\client\\src\\static\\images\\adImages\\" + image);
             helper.addInline("adImage", adImage);
 
             System.out.println(message);
             mailSender.send(message);
 
         } catch (MessagingException me) {
-            System.out.println(me);
+            throw new RuntimeException(me);
         }
 
         return newAd;
     }
 
+    public Ad contactSeller(ContactMessage contactMessage) {
+
+        Optional<Ad> optionalMessage = adRepo.findById(contactMessage.getId());
+
+        if (optionalMessage.isPresent()) {
+
+            // Seller
+            String recieverEmail = optionalMessage.get().getEmail();
+
+            // Interested buyer
+            String subject = contactMessage.getSubject();
+            String message = contactMessage.getMessage();
+            String senderEmail = contactMessage.getEmail();
+
+            String from = senderEmail;
+            String to = recieverEmail;
+
+            try {
+                MimeMessage formattedMessage = mailSender.createMimeMessage();
+                MimeMessageHelper helper = new MimeMessageHelper(formattedMessage, true);
+
+                String mailSubject = subject;
+                String mailContent = "Interested Buyer's E-mail: " + "\n" + "\n";
+                mailContent += " " + senderEmail + "\n" + "\n";
+                mailContent += "Subject: " + "\n" + "\n";
+                mailContent += " " + subject + "\n" + "\n";
+                mailContent += "Message: " + "\n" + "\n";
+                mailContent += " " + message + "\n" + "\n";
+
+                helper.setFrom(from);
+                helper.setTo(to);
+                helper.setSubject(mailSubject);
+                helper.setText(mailContent);
+
+                // System.out.println(formattedMessage);
+                mailSender.send(formattedMessage);
+
+            } catch (MessagingException me) {
+                throw new RuntimeException(me);
+            }
+
+        }
+        return null;
+
+    }
+
     public Ad updateAd(Ad ad) {
         Optional<Ad> dbAd = adRepo.findById(ad.getId());
-        if(dbAd.isPresent()) {
+        if (dbAd.isPresent()) {
             System.out.println("Found");
             ad.setEmail(dbAd.get().getEmail());
             return adRepo.save(ad);

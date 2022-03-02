@@ -1,18 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './ContactForm.module.css'
 import pushPin from '../../static/images/drawing-pin.png';
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
+
+import adService from '../../services/AdService';
 
 
 const ContactForm = () => {
+    const { adId } = useParams();
     const history = useHistory()
+    const [contactEmail, setContactEmail] = useState('')
+    const [subject, setSubject] = useState('')
+    const [message, setMessage] = useState('')
 
 
 
     const submitHandler = (e) => {
         e.preventDefault();
+        const contactForm = {
+            id: adId,
+            email: contactEmail,
+            subject: subject,
+            message: message
+        }
+        adService.contactSeller(contactForm)
+        .then(response => {
+            history.push(`/details/${adId}`)
+        })
 
-        history.push(`/details/0`)
     }
 
 
@@ -26,11 +41,15 @@ const ContactForm = () => {
                 <div>
                     <div className='mb-3'>
                         <label for="email" >Your Email</label>
-                        <input type="email" name="email" className="form-control" />
+                        <input onChange={(e) => setContactEmail(e.target.value)} type="email" name="email" className="form-control" />
+                    </div>
+                    <div className='mb-3'>
+                        <label for="subject" >Subject</label>
+                        <input onChange={(e) => setSubject(e.target.value)} type="subject" name="subject" className="form-control" />
                     </div>
                     <div>
                         <label for="message">Message</label>
-                        <textarea name="message" id="message" cols="45" rows="10" className="form-control" ></textarea>
+                        <textarea onChange={(e) => setMessage(e.target.value)} name="message" id="message" cols="45" rows="10" className="form-control" ></textarea>
                     </div>
                     <div className='d-flex justify-content-center my-3'>
                         <button className='btn btn-success px-3'>

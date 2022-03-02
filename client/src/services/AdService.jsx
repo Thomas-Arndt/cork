@@ -14,6 +14,10 @@ class AdService {
     createAd(data){
         return axiosService.getRestClient().post("/createAd", data)
     }
+
+    contactSeller(data){
+        return axiosService.getRestClient().post("/contactSeller", data)
+    }
     
     updateAd(data){
         return axiosService.getRestClient().put(`/updateAd/${data.id}`, data)
