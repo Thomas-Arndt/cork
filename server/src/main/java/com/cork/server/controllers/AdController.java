@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.cork.server.models.Ad;
+import com.cork.server.models.ContactMessage;
 import com.cork.server.services.AdService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class AdController {
     @PostMapping("/uploadImage")
     public ResponseEntity<Map<String, String>> uploadImage(@RequestParam("file") MultipartFile file) {
         UUID guid = UUID.randomUUID();
-        File absolutePath = new File("C:\\Users\\Rangel\\Desktop\\cork\\client\\src\\static\\images\\adImages" + guid
+        File absolutePath = new File("C:\\Users\\Rangel\\Desktop\\cork\\client\\src\\static\\images\\adImages\\" + guid
                 + file.getOriginalFilename());
         String fileName = guid + file.getOriginalFilename();
         try {
@@ -68,10 +69,18 @@ public class AdController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/contactSeller")
+    public ResponseEntity<Ad> contactSeller(@RequestBody ContactMessage message) {
+        Ad contactMessage = adService.contactSeller(message);
+        return ResponseEntity.ok(contactMessage);
+
+    }
+
     @DeleteMapping("/deleteImage/{fileName}")
     public ResponseEntity<Map<String, Boolean>> deleteImage(@PathVariable("fileName") String fileName) {
         File fileToDelete = new File(
-                "/home/bebop/Coding/CodingDojo/projects/java/cork/client/src/static/images/adImages/" + fileName);
+                "\\home\\bebop\\Coding\\CodingDojo\\projects\\java\\cork\\client\\src\\static\\images\\adImages\\"
+                        + fileName);
         Map<String, Boolean> response = new HashMap<>();
         if (fileToDelete.delete()) {
             response.put("deleted", Boolean.TRUE);
