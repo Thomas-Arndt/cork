@@ -1,26 +1,31 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import adService from '../../services/AdService';
+import fileService from '../../services/FileService';
 import styles from "./EditAdForm.module.css";
 import pushPin from '../../static/images/drawing-pin.png';
 
 const EditAdForm = () => {
     const history = useHistory();
+    const { adId } = useParams();
     const [ title, setTitle ] = useState('');
     const [ price, setPrice ] = useState(0.00);
     const [ category, setCategory ] = useState('');
     const [ description, setDescription ] = useState('');
     const [ image, setImage ] = useState();
     const [ imagePreview, setImagePreview ] = useState();
+    const [ imageError, setImageError ] = useState(null);
+    const [ previousImage, setPreviousImage ] = useState('');
     const [ city, setCity ] = useState('');
     const [ state, setState ] = useState('');
     const [ email, setEmail ] = useState('');
 
     const categories = [
-        "antiques", "appliances", "arts/crafts", "barter", "bikes", "boats",
-        "books", "business", "cars/trucks", "cds/dvds/vhs", "clothes", "collectibles",
-        "computers", "electronics", "farm/garden", "free", "furniture", "heavy equipment",
+        "antiques", "appliances", "arts+crafts", "barter", "bikes", "boats",
+        "books", "business", "cars+trucks", "cds+dvds+vhs", "clothes", "collectibles",
+        "computers", "electronics", "farm+garden", "free", "furniture", "heavy equipment",
         "household items", "jewelry", "materials", "motorcycles", "musical instruments",
-        "photo/video", "rvs/camp", "sporting", "tickets", "tools", "toys/games", "trailers",
+        "photo+video", "rvs+camp", "sporting", "tickets", "tools", "toys+games", "trailers",
         "trailers", "video gaming"
     ]
 
@@ -31,26 +36,88 @@ const EditAdForm = () => {
         "VA", "WA", "WV", "WI", "WY"
     ]
 
-    const handlePreview = (e) => {
+    useEffect(() => {
+        adService.getOneAd(adId)
+        .then(response => {
+            setTitle(response.data.title);
+            setPrice(response.data.price);
+            setCategory(response.data.category);
+            setDescription(response.data.description);
+            setImage(response.data.image)
+            setImagePreview(require(`../../static/images/adImages/${response.data.image}`));
+            setCity(response.data.city);
+            setState(response.data.state);
+            setEmail(response.data.email);
+        })
+        .catch(error => console.error(error))
+    },[]);
+
+    const handleImage = (e) => {
+        setPreviousImage(image);
         if(e.target.files.length === 0) {
             setImagePreview('');
+            setImage('');
             return;
         }
 
         let file = e.target.files[0];
         let reader = new FileReader();
-
-        reader.onloadend = (e) => {
-            setImagePreview(reader.result);
+        if(Math.round(file.size/1024) > 4096) {
+            setImageError("File cannot be more than 4MB")
+        } else {
+            setImageError(null);
+            setImage(e.target.files[0]);
+    
+            reader.onloadend = (e) => {
+                setImagePreview(reader.result);
+            }
+    
+            reader.readAsDataURL(file);
         }
-
-        reader.readAsDataURL(file);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        history.push('/details/0');
+        if(previousImage) {
+            fileService.deleteFile(previousImage)
+            fileService.uploadFile(image)
+            .then(response => {
+                console.log(response.data);
+                const formData = {
+                    id: adId,
+                    title: title,
+                    price: price,
+                    category: category,
+                    description: description,
+                    image: response.data.filePath,
+                    city: city,
+                    state: state,
+                    email: email
+                }
+                adService.updateAd(formData)
+                    .then(response => {
+                        let newAd = response.data
+                        history.push(`/posted/${newAd.id}`);
+                    })
+                })
+        } else {
+            const formData = {
+                id: adId,
+                title: title,
+                price: price,
+                category: category,
+                description: description,
+                image: image,
+                city: city,
+                state: state,
+                email: email
+            }
+            adService.updateAd(formData)
+                .then(response => {
+                    let newAd = response.data
+                    history.push(`/posted/${newAd.id}`);
+                })
+        }
     }
 
     return (
@@ -59,16 +126,16 @@ const EditAdForm = () => {
             <form onSubmit={handleSubmit}>
                 <div className="d-flex justify-content-between" >
                     <div className="d-flex flex-column">
-                        <label for="title" >Posting Title</label>
-                        <input type="text" name="title" className="form-control" />
+                        <label>Posting Title</label>
+                        <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" className="form-control" />
                     </div>
                     <div className="d-flex flex-column col-2">
-                        <label for="price" >Asking Price</label>
-                        <input type="number" name="price" inputMode="decimal" step="0.01" value="0.00" className="form-control" />
+                        <label>Asking Price</label>
+                        <input onChange={(e) => setPrice(e.target.value)} value={price} type="number" name="price" inputMode="decimal" step="0.01" placeholder="0.00" className="form-control" />
                     </div>
                     <div className="d-flex flex-column">
-                        <label for="category" >Category</label>
-                        <select name="category" className="form-control">
+                        <label>Category</label>
+                        <select onChange={(e) => setCategory(e.target.value)} value={category} name="category" className="form-control">
                             <option value="">Choose a Category</option>
                             {categories.map((category, i) => 
                                 <option key={i} value={category}>{category}</option>
@@ -77,36 +144,33 @@ const EditAdForm = () => {
                     </div>
                 </div>
                 <div className="d-flex flex-column">
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" cols="30" rows="10" className="form-control" ></textarea>
+                    <label>Description</label>
+                    <textarea onChange={(e) => setDescription(e.target.value)} value={description} name="description" id="description" cols="30" rows="10" className="form-control" ></textarea>
                 </div>
                 <div className="d-flex gap-3">
                     <div>
-                        <label for="image">Upload Image</label>
+                        <label>Upload Image</label>
                         <div className="d-flex flex-column align-items-center border p-3 bg-white" >
-                            <input type="file" name="image" onChange={handlePreview} className="form-control" />
+                            <input type="file" name="image" onChange={handleImage} className="form-control" />
+                            {imageError && <p className="alert alert-danger mt-1">{imageError}</p>}
                             {imagePreview && <img src={imagePreview} className={`col-12 p-3 mt-3 ${styles.preview}`} />}
                         </div>
                     </div>
                     <div>
                         <div className="d-flex flex-column">
-                            <label for="city" >City</label>
-                            <input type="text" name="city" className="form-control" />
+                            <label>City</label>
+                            <input onChange={(e) => setCity(e.target.value)} value={city} type="text" name="city" className="form-control" />
                         </div>
                         <div>
-                            <label for="state">State</label>
-                            <select name="state" className="form-control">
+                            <label>State</label>
+                            <select onChange={(e) => setState(e.target.value)} value={state} name="state" className="form-control">
                                 <option value="">--</option>
                                 {states.map((state, i) =>
                                     <option key={i} value={state}>{state}</option>
                                 )}
                             </select>
                         </div>
-                        <div>
-                            <label for="email" >Email</label>
-                            <input type="email" name="email" className="form-control" />
-                        </div>
-                        <input type="submit" value="Post Ad!" className="btn btn-secondary mt-3" />
+                        <input type="submit" value="Update Ad" className="btn btn-secondary mt-3" />
                     </div>
                 </div>
             </form>

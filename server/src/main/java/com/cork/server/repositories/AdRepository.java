@@ -11,5 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface AdRepository extends CrudRepository<Ad, Long> {
 
     List<Ad> findAll();
+    List<Ad> findByCategory(String category);
 
 }
