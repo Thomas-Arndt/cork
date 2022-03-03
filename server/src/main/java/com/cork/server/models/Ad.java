@@ -30,14 +30,15 @@ public class Ad {
     @Size(min = 2, max = 255, message = "Title must be 2-255 characters")
     private String title;
 
-    @Positive(message = "Price must be greater than 0")
+    @Positive(message = "Price must be greater than $0.00")
     @Max(value = 2000000000, message = "Price cannot exceed two billion dollars")
     private Double price;
 
     @NotNull(message = "Category is required")
     private String category;
 
-    @Size(min = 12, max = 65000)
+    @Size(min = 12, message="Description must be at least 12 characters.")
+    @Size(max = 65000, message="Description cannot be more than 65,000 characters.")
     @Type(type = "text")
     private String description;
 

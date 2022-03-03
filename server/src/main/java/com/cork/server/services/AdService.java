@@ -99,7 +99,7 @@ public class AdService {
             helper.setText(mailContent, true);
 
             DataSource adImage = new FileDataSource(
-                    "C:\\Users\\Rangel\\Desktop\\cork\\client\\src\\static\\images\\adImages\\" + image);
+                    "/home/bebop/Coding/CodingDojo/projects/java/cork/client/src/static/images/adImages/" + image);
             helper.addInline("adImage", adImage);
 
             System.out.println(message);

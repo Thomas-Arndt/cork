@@ -3,7 +3,12 @@ import styles from './StickyNote.module.css';
 import pushPin from '../../static/images/drawing-pin.png';
 
 const StickyNote = ({ ad }) => {
-    const image = require(`../../static/images/adImages/${ad.image}`)
+    let image = null;
+    if(ad.image){
+        image = require(`../../static/images/adImages/${ad.image}`)
+    } else {
+        image = "na"
+    }
 
     return (
         <a href={`/details/${ad.id}`} className={styles.stickyNote} >

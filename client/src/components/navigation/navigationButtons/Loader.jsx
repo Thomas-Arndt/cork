@@ -8,8 +8,8 @@ const Loader = () => {
   return (
 
 
-    <div class="spinner-border spinner-border-lg text-dark" role="status">
-        <span class="visually-hidden">Loading...</span>
+    <div className="spinner-border spinner-border-lg text-dark" role="status">
+        <span className="visually-hidden">Loading...</span>
     </div>
 
 
