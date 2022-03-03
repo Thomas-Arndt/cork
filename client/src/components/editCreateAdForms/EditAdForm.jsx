@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import adService from '../../services/AdService';
 import fileService from '../../services/FileService';
+import Loader from '../navigation/navigationButtons/Loader';
 import styles from "./EditAdForm.module.css";
 import pushPin from '../../static/images/drawing-pin.png';
 
 const EditAdForm = () => {
     const history = useHistory();
     const { adId } = useParams();
+    const [ isSubmitted, setIsSubmitted ] = useState(false);
     const [ title, setTitle ] = useState('');
     const [ price, setPrice ] = useState(0.00);
     const [ category, setCategory ] = useState('');
@@ -19,7 +21,9 @@ const EditAdForm = () => {
     const [ city, setCity ] = useState('');
     const [ state, setState ] = useState('');
     const [ email, setEmail ] = useState('');
-    const [errors, setErrors] = useState(null);
+
+    const [ errors, setErrors ] = useState(null);
+
 
     const categories = [
         "antiques", "appliances", "arts+crafts", "barter", "bikes", "boats",
@@ -49,6 +53,7 @@ const EditAdForm = () => {
             setCity(response.data.city);
             setState(response.data.state);
             setEmail(response.data.email);
+            console.log(response.data.email);
         })
         .catch(error => console.error(error))
     },[]);
@@ -79,6 +84,7 @@ const EditAdForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsSubmitted(true);
         if(previousImage) {
             fileService.deleteFile(previousImage)
             fileService.uploadFile(image)
@@ -97,13 +103,18 @@ const EditAdForm = () => {
                 }
                 adService.updateAd(formData)
                     .then(response => {
-                        if(response.status === 207){
+
+
+                        if(response.status === 207) {
+                            fileService.deleteFile(image);
                             let errorList = [];
-                            for(const err of response.data){
+                            for(const err of response.data) {
                                 errorList.push(err.defaultMessage)
                             }
                             setErrors(errorList);
-                        }else {
+                            setIsSubmitted(false);
+                        } else {
+
                             let newAd = response.data
                             history.push(`/posted/${newAd.id}`);
                         }
@@ -122,14 +133,17 @@ const EditAdForm = () => {
                 email: email
             }
             adService.updateAd(formData)
-                .then(response => {
-                    if(response.status === 207){
+                .then(response => {       
+
+                    if(response.status === 207) {
                         let errorList = [];
-                        for(const err of response.data){
+                        for(const err of response.data) {
                             errorList.push(err.defaultMessage)
                         }
                         setErrors(errorList);
-                    }else {
+                        setIsSubmitted(false);
+                    } else {
+
                         let newAd = response.data
                         history.push(`/posted/${newAd.id}`);
                     }
@@ -153,7 +167,7 @@ const EditAdForm = () => {
                     <div className="d-flex flex-column">
                         <label>Category</label>
                         <select onChange={(e) => setCategory(e.target.value)} value={category} name="category" className="form-control">
-                            <option value="">Choose a Category</option>
+                            <option value={null}>Choose a Category</option>
                             {categories.map((category, i) => 
                                 <option key={i} value={category}>{category}</option>
                             )}
@@ -181,20 +195,30 @@ const EditAdForm = () => {
                         <div>
                             <label>State</label>
                             <select onChange={(e) => setState(e.target.value)} value={state} name="state" className="form-control">
-                                <option value="">--</option>
+                                <option value={null}>--</option>
                                 {states.map((state, i) =>
                                     <option key={i} value={state} className='my-0'>{state}</option>
                                 )}
                             </select>
                         </div>
-                        {errors && 
-                            <div className='aler alert-danger d-flex flex-column align-items-center'>
-                                {errors.map((err, i) =>
-                                <p key={i}>{err}</p>
+
+                
+
+                        <div>
+                            <label>Email</label>
+                            <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" name="email" className="form-control" />
+                        </div>
+                        {errors &&
+                            <div className="alert alert-danger d-flex flex-column align-items-center">
+                                {errors.map((err, i) => 
+                                    <p key={i} className="my-0">{err}</p>
                                 )}
                             </div>
                         }
-                        <input type="submit" value="Update Ad" className="btn btn-secondary mt-3" />
+                        {!isSubmitted ?
+                        <input type="submit" value="Update Ad" className="btn btn-secondary mt-3" /> :
+                        <div className="mt-3"><Loader /> Submitting...</div>}
+
                     </div>
                 </div>
             </form>

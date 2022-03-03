@@ -28,8 +28,9 @@ import Spacer from './components/navigation/navigationButtons/Spacer';
 
 
 function App() {
-  const [adList, setAdList] = useState([]);
-  const [category, setCategory] = useState('all');
+
+  const [ adList, setAdList ] = useState([]);
+  const [ category, setCategory ] = useState('all');
 
 
   return (
@@ -69,12 +70,12 @@ function App() {
               <ComponentWithNavigation >
                 <TitleNote />
                 <FilterBar >
-                  <FilterForm setAdList={setAdList} />
-                  <SearchBar />
+                  <Spacer />
                   <NavButtonsContainer >
-                    <Back />
+                    <Browse />
                     <PostAd />
                   </NavButtonsContainer>
+                  <Spacer />
                 </FilterBar>
                 <AdDetails />
               </ComponentWithNavigation>

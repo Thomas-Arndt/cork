@@ -64,10 +64,10 @@ public class AdController {
     public ResponseEntity<Map<String, String>> uploadImage(
             @RequestParam(value = "file", required = false) MultipartFile file) {
         String fileName = "drawing-pin.png";
-        if (file == null) {
+        if (file != null) {
             UUID guid = UUID.randomUUID();
             File absolutePath = new File(
-                    "C:\\Users\\Rangel\\Desktop\\cork\\client\\src\\static\\images\\adImages\\" + guid
+                    "/home/bebop/Coding/CodingDojo/projects/java/cork/client/src/static/images/adImages/" + guid
                             + file.getOriginalFilename());
             fileName = guid + file.getOriginalFilename();
             try {
@@ -75,7 +75,6 @@ public class AdController {
             } catch (IOException ioe) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
-
         }
         Map<String, String> response = new HashMap<>();
         response.put("filePath", fileName);
@@ -96,7 +95,7 @@ public class AdController {
     @DeleteMapping("/deleteImage/{fileName}")
     public ResponseEntity<Map<String, Boolean>> deleteImage(@PathVariable("fileName") String fileName) {
         File fileToDelete = new File(
-                "\\home\\bebop\\Coding\\CodingDojo\\projects\\java\\cork\\client\\src\\static\\images\\adImages\\"
+                "/home/bebop/Coding/CodingDojo/projects/java/cork/client/src/static/images/adImages/"
                         + fileName);
         Map<String, Boolean> response = new HashMap<>();
         if (fileToDelete.delete()) {
@@ -115,7 +114,6 @@ public class AdController {
             Ad updatedAd = adService.updateAd(ad);
             return ResponseEntity.ok(updatedAd);
         }
-
     }
 
     @DeleteMapping("/deleteAd/{id}")
