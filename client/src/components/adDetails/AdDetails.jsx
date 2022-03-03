@@ -18,7 +18,7 @@ const AdDetails = () => {
     useEffect(() => {
         adService.getOneAd(adId)
         .then(response => {
-            console.log(response.data)
+            console.log(response.data.image)
             setAd(response.data)
             setImage(require(`../../static/images/adImages/${response.data.image}`));
         })
