@@ -14,13 +14,16 @@ const AdDetails = () => {
     const [ad, setAd] = useState();
     const [ image, setImage ] = useState();
 
-
     useEffect(() => {
         adService.getOneAd(adId)
         .then(response => {
             console.log(response.data)
             setAd(response.data)
-            setImage(require(`../../static/images/adImages/${response.data.image}`));
+            if(response.data.image === "Default_Image.png") {
+                setImage(require(`../../static/images/${response.data.image}`))
+            } else {
+                setImage(require(`../../static/images/adImages/${response.data.image}`))
+            }
         })
         .catch(error => console.error(error))
     }, [])
@@ -39,7 +42,7 @@ const AdDetails = () => {
                             <div className='d-flex mt-1 p-3 gap-5' style={{width: '550px', height: '350px'}}>
                                 <div className='d-flex  p-3'>
                                     <div className='d-flex align-items-start'>
-                                        <img src={image} alt="image" className={styles.image} />
+                                        <img src={image} alt="Advertisement" className={styles.image} />
                                     </div>
                                 </div>
                                 <div className={`d-flex flex-column `}>
@@ -53,11 +56,7 @@ const AdDetails = () => {
                                     </div>
                                     <div className='d-flex flex-column align-items-center mb-2'>
                                         <label className='label'>Asking Price</label>
-
-                                        
-
-                                        <h4>$ {ad.price}</h4>
-
+                                        <h4>$ {ad.price.toFixed(2)}</h4>
                                     </div>
                                     <button className='btn btn-primary mt-2'>
                                         {/* links to contact listing owner view, ("/#/" + creator._id + "/contact")*/}
@@ -67,13 +66,8 @@ const AdDetails = () => {
                                     </button>
                                 </div> 
                             </div>
-        
                                 <div className={`rounded-3 ${styles.description}`} >
-
-                                 
-
                                     <p className='border text-center p-2'>
-
                                         {ad.description}
                                     </p>
                                 </div>

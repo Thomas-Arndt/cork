@@ -63,7 +63,7 @@ public class AdController {
     @PostMapping("/uploadImage")
     public ResponseEntity<Map<String, String>> uploadImage(
             @RequestParam(value = "file", required = false) MultipartFile file) {
-        String fileName = "drawing-pin.png";
+        String fileName = "Default_Image.png";
         if (file != null) {
             UUID guid = UUID.randomUUID();
             File absolutePath = new File(
