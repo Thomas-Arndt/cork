@@ -12,14 +12,16 @@ const NewAdForm = () => {
     const [ isSubmitted, setIsSubmitted ] = useState(false);
     const [ title, setTitle ] = useState('');
     const [ price, setPrice ] = useState(0.00);
-    const [ category, setCategory ] = useState('');
+    const [ category, setCategory ] = useState(undefined);
     const [ description, setDescription ] = useState('');
     const [ image, setImage ] = useState('');
-    const [ imagePreview, setImagePreview ] = useState();
+    const [ imagePreview, setImagePreview ] = useState(null);
     const [ imageError, setImageError ] = useState(null);
     const [ city, setCity ] = useState('');
-    const [ state, setState ] = useState('');
+    const [ state, setState ] = useState(undefined);
     const [ email, setEmail ] = useState('');
+    const [ errors, setErrors ] = useState(null);
+    
 
 
     const categories = [
@@ -81,8 +83,18 @@ const NewAdForm = () => {
             }
             adService.createAd(formData)
                 .then(response => {
-                    let newAd = response.data
-                    history.push(`/posted/${newAd.id}`);
+                    if(response.status === 207) {
+                        fileService.deleteFile(image);
+                        let errorList = [];
+                        for(const err of response.data) {
+                            errorList.push(err.defaultMessage)
+                        }
+                        setErrors(errorList);
+                        setIsSubmitted(false);
+                    } else {
+                        let newAd = response.data
+                        history.push(`/posted/${newAd.id}`);
+                    }
                 })
         })
         
@@ -104,7 +116,7 @@ const NewAdForm = () => {
                     <div className="d-flex flex-column">
                         <label>Category</label>
                         <select onChange={(e) => setCategory(e.target.value)} value={category} name="category" className="form-control">
-                            <option value="">Choose a Category</option>
+                            <option value={null}>Choose a Category</option>
                             {categories.map((category, i) => 
                                 <option key={i} value={category}>{category}</option>
                             )}
@@ -132,7 +144,7 @@ const NewAdForm = () => {
                         <div>
                             <label>State</label>
                             <select onChange={(e) => setState(e.target.value)} value={state} name="state" className="form-control">
-                                <option value="">--</option>
+                                <option value={null}>--</option>
                                 {states.map((state, i) =>
                                     <option key={i} value={state}>{state}</option>
                                 )}
@@ -142,6 +154,13 @@ const NewAdForm = () => {
                             <label>Email</label>
                             <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" name="email" className="form-control" />
                         </div>
+                        {errors &&
+                            <div className="alert alert-danger d-flex flex-column align-items-center">
+                                {errors.map((err, i) => 
+                                    <p key={i} className="my-0">{err}</p>
+                                )}
+                            </div>
+                        }
                         {!isSubmitted ?
                         <input type="submit" value="Post Ad!" className="btn btn-secondary mt-3" /> :
                         <div className="mt-3"><Loader /> Submitting...</div>}
