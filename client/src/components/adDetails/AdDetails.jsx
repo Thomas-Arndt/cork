@@ -17,7 +17,7 @@ const AdDetails = () => {
     useEffect(() => {
         adService.getOneAd(adId)
         .then(response => {
-            console.log(response.data)
+            console.log(response.data.image)
             setAd(response.data)
             if(response.data.image === "Default_Image.png") {
                 setImage(require(`../../static/images/${response.data.image}`))

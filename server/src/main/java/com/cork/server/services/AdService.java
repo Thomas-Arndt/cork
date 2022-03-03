@@ -99,7 +99,7 @@ public class AdService {
             helper.setText(mailContent, true);
 
             DataSource adImage = new FileDataSource(
-                    "/home/bebop/Coding/CodingDojo/projects/java/cork/client/src/static/images/adImages/" + image);
+                    "C:\\Users\\Rangel\\Desktop\\cork\\client\\src\\static\\images\\adImages\\" + image);
             helper.addInline("adImage", adImage);
 
             System.out.println(message);
@@ -134,17 +134,35 @@ public class AdService {
                 MimeMessageHelper helper = new MimeMessageHelper(formattedMessage, true);
 
                 String mailSubject = subject;
-                String mailContent = "Interested Buyer's E-mail: " + "\n" + "\n";
-                mailContent += " " + senderEmail + "\n" + "\n";
-                mailContent += "Subject: " + "\n" + "\n";
-                mailContent += " " + subject + "\n" + "\n";
-                mailContent += "Message: " + "\n" + "\n";
-                mailContent += " " + message + "\n" + "\n";
+                String mailContent = "<!doctype html>\n" +
+                        "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\"\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <meta name=\"viewport\"\n" +
+                        "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n"
+                        +
+                        "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
+                        "    <title>Email</title>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "<h2 style=''>Interested Buyer's E-mail:   " + senderEmail + "</h2>" +
+                        "<h2 style='display:flex; flex-wrap: wrap; justify-content:center; width: 100px; margin-top: 35px;  border-radius: 5px; padding: 10px'>Message:     "
+                        + "</h2>" +
+                        "<h2>" + message + "</h2>" +
+                        "</body>\n" +
+                        "</html>\n";
+
+                // "Interested Buyer's E-mail: " + "\n" + "\n";
+                // mailContent += " " + senderEmail + "\n" + "\n";
+                // mailContent += "Subject: " + "\n" + "\n";
+                // mailContent += " " + subject + "\n" + "\n";
+                // mailContent += "Message: " + "\n" + "\n";
+                // mailContent += " " + message + "\n" + "\n";
 
                 helper.setFrom(from);
                 helper.setTo(to);
                 helper.setSubject(mailSubject);
-                helper.setText(mailContent);
+                helper.setText(mailContent, true);
 
                 // System.out.println(formattedMessage);
                 mailSender.send(formattedMessage);

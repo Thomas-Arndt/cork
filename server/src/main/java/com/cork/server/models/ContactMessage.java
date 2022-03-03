@@ -11,7 +11,8 @@ public class ContactMessage {
     @Size(min = 2, max = 255, message = "Subject must be 2-255 characters")
     private String subject;
 
-    @Size(min = 12, max = 65000)
+    @Size(min = 12, message = "Message must be at least 12 characters.")
+    @Size(max = 65000, message = "Message cannot be more than 65,000 characters.")
     @Type(type = "text")
     private String message;
 
