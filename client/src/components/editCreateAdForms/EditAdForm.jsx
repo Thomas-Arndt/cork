@@ -184,7 +184,7 @@ const EditAdForm = () => {
                         <div className="d-flex flex-column align-items-center border p-3 bg-white" >
                             <input type="file" name="image" onChange={handleImage} className="form-control" />
                             {imageError && <p className="alert alert-danger mt-1">{imageError}</p>}
-                            {imagePreview && <img src={imagePreview} className={`col-12 p-3 mt-3 ${styles.preview}`} />}
+                            {imagePreview && <img src={imagePreview} alt="Preview" className={`col-12 p-3 mt-3 ${styles.preview}`} />}
                         </div>
                     </div>
                     <div>
@@ -216,7 +216,7 @@ const EditAdForm = () => {
                             </div>
                         }
                         {!isSubmitted ?
-                        <input type="submit" value="Update Ad" className="btn btn-secondary mt-3" /> :
+                        <input type="submit" value="Update Ad" className={`${styles.button} mt-3`} /> :
                         <div className="mt-3"><Loader /> Submitting...</div>}
 
                     </div>

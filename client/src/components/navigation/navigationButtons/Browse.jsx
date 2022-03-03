@@ -1,18 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
+import { useHistory } from 'react-router-dom';
+import styles from './navButton.module.css';
 
 const Browse = () => {
-
+  const history = useHistory();
 
   return (
 
 
-    <button className='btn btn-primary  p-0 px-2'>
-        {/* links to show all view, ("/dashboard")*/}
-        <Link to={"/browse"} className='text-light text-decoration-none'>
+    <button onClick={() => history.push('/browse')} className={styles.button}>
             Browse
-        </Link>
     </button>
 
 

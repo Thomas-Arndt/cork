@@ -25,9 +25,18 @@
     margin-top: 15px;
 }
 
-.viewNow{
+.button{
     margin-top: 30px;
     font-size: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: transform .1s linear, background-color .1s linear, box-shadow .1s linear;
+}
+
+.button:hover{
+    background-color: lightgray;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
 }
 
 .message{

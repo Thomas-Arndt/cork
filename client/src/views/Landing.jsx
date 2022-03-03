@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from './Landing.module.css';
 import pushPin from '../static/images/drawing-pin.png';
 

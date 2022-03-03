@@ -105,15 +105,15 @@ const NewAdForm = () => {
             <h2 className={styles.title}>Post a New Advertisement</h2>
             <form onSubmit={handleSubmit}>
                 <div className="d-flex justify-content-between" >
-                    <div className="d-flex flex-column">
-                        <label>Posting Title</label>
+                    <div className={`d-flex flex-column ${styles.priceDiv}`}>
+                        <label className="text-nowrap">Posting Title</label>
                         <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" className="form-control" />
                     </div>
-                    <div className="d-flex flex-column col-2">
-                        <label>Asking Price</label>
+                    <div className={`d-flex flex-column col-2 ${styles.priceDiv}`}>
+                        <label className="text-nowrap">Asking Price</label>
                         <input onChange={(e) => setPrice(e.target.value)} value={price} type="number" name="price" inputMode="decimal" step="0.01" className="form-control" />
                     </div>
-                    <div className="d-flex flex-column">
+                    <div className={`d-flex flex-column ${styles.priceDiv}`}>
                         <label>Category</label>
                         <select onChange={(e) => setCategory(e.target.value)} value={category} name="category" className="form-control">
                             <option value={null}>Choose a Category</option>
@@ -133,7 +133,7 @@ const NewAdForm = () => {
                         <div className="d-flex flex-column align-items-center border p-3 bg-white" >
                             <input type="file" name="image" onChange={handleImage} className="form-control" />
                             {imageError && <p className="alert alert-danger mt-1">{imageError}</p>}
-                            {imagePreview && <img src={imagePreview} className={`col-12 p-3 mt-3 ${styles.preview}`} />}
+                            {imagePreview && <img src={imagePreview} alt="Preview" className={`col-12 p-3 mt-3 ${styles.preview}`} />}
                         </div>
                     </div>
                     <div>
@@ -162,7 +162,7 @@ const NewAdForm = () => {
                             </div>
                         }
                         {!isSubmitted ?
-                        <input type="submit" value="Post Ad!" className="btn btn-secondary mt-3" /> :
+                        <input type="submit" value="Post Ad!" className={`${styles.button} mt-3`} /> :
                         <div className="mt-3"><Loader /> Submitting...</div>}
                     </div>
                 </div>

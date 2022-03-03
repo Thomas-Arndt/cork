@@ -67,7 +67,7 @@ const ContactForm = () => {
                             </div>
                         }
                     <div className='d-flex justify-content-center my-3'>
-                        <button className='btn btn-success px-3'>
+                        <button className={styles.button}>
                             Send
                         </button>
                     </div>
