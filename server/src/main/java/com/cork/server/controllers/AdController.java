@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import com.cork.server.models.Ad;
 import com.cork.server.models.ContactMessage;
 import com.cork.server.services.AdService;
@@ -14,6 +16,7 @@ import com.cork.server.services.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,22 +50,32 @@ public class AdController {
     }
 
     @PostMapping("/createAd")
-    public ResponseEntity<Ad> createAd(@RequestBody Ad ad) {
-        Ad newAd = adService.createAd(ad);
-        return ResponseEntity.ok(newAd);
+    public ResponseEntity<?> createAd(@Valid @RequestBody Ad ad, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ResponseEntity<>(result.getFieldErrors(), HttpStatus.valueOf(207));
+        } else {
+            Ad newAd = adService.createAd(ad);
+            return ResponseEntity.ok(newAd);
+        }
 
     }
 
     @PostMapping("/uploadImage")
-    public ResponseEntity<Map<String, String>> uploadImage(@RequestParam("file") MultipartFile file) {
-        UUID guid = UUID.randomUUID();
-        File absolutePath = new File("C:\\Users\\Rangel\\Desktop\\cork\\client\\src\\static\\images\\adImages\\" + guid
-                + file.getOriginalFilename());
-        String fileName = guid + file.getOriginalFilename();
-        try {
-            file.transferTo(absolutePath);
-        } catch (IOException ioe) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    public ResponseEntity<Map<String, String>> uploadImage(
+            @RequestParam(value = "file", required = false) MultipartFile file) {
+        String fileName = "drawing-pin.png";
+        if (file == null) {
+            UUID guid = UUID.randomUUID();
+            File absolutePath = new File(
+                    "C:\\Users\\Rangel\\Desktop\\cork\\client\\src\\static\\images\\adImages\\" + guid
+                            + file.getOriginalFilename());
+            fileName = guid + file.getOriginalFilename();
+            try {
+                file.transferTo(absolutePath);
+            } catch (IOException ioe) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+
         }
         Map<String, String> response = new HashMap<>();
         response.put("filePath", fileName);
@@ -70,9 +83,13 @@ public class AdController {
     }
 
     @PostMapping("/contactSeller")
-    public ResponseEntity<Ad> contactSeller(@RequestBody ContactMessage message) {
-        Ad contactMessage = adService.contactSeller(message);
-        return ResponseEntity.ok(contactMessage);
+    public ResponseEntity<?> contactSeller(@Valid @RequestBody ContactMessage message, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ResponseEntity<>(result.getFieldErrors(), HttpStatus.valueOf(207));
+        } else {
+            Ad contactMessage = adService.contactSeller(message);
+            return ResponseEntity.ok(contactMessage);
+        }
 
     }
 
@@ -91,9 +108,13 @@ public class AdController {
     }
 
     @PutMapping("/updateAd/{id}")
-    public ResponseEntity<Ad> updateAd(@RequestBody Ad ad) {
-        Ad updatedAd = adService.updateAd(ad);
-        return ResponseEntity.ok(updatedAd);
+    public ResponseEntity<?> updateAd(@Valid @RequestBody Ad ad, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ResponseEntity<>(result.getFieldErrors(), HttpStatus.valueOf(207));
+        } else {
+            Ad updatedAd = adService.updateAd(ad);
+            return ResponseEntity.ok(updatedAd);
+        }
 
     }
 
