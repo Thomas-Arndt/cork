@@ -12,6 +12,7 @@ const ContactForm = () => {
     const [contactEmail, setContactEmail] = useState('')
     const [subject, setSubject] = useState('')
     const [message, setMessage] = useState('')
+    const [errors, setErrors] = useState(null)
 
 
 
@@ -25,9 +26,16 @@ const ContactForm = () => {
         }
         adService.contactSeller(contactForm)
         .then(response => {
-            history.push(`/details/${adId}`)
+            if(response.status === 207){
+                let errorList = [];
+                for(const err of response.data){
+                    errorList.push(err.defaultMessage)
+                }
+                setErrors(errorList);
+            }else {
+                history.push(`/details/${adId}`)
+            }
         })
-
     }
 
 
@@ -51,6 +59,13 @@ const ContactForm = () => {
                         <label for="message">Message</label>
                         <textarea onChange={(e) => setMessage(e.target.value)} name="message" id="message" cols="45" rows="10" className="form-control" ></textarea>
                     </div>
+                    {errors && 
+                            <div className='aler alert-danger d-flex flex-column align-items-center'>
+                                {errors.map((err, i) =>
+                                <p key={i}>{err}</p>
+                                )}
+                            </div>
+                        }
                     <div className='d-flex justify-content-center my-3'>
                         <button className='btn btn-success px-3'>
                             Send

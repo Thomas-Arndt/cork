@@ -53,7 +53,7 @@ const AdDetails = () => {
                                     </div>
                                     <div className='d-flex flex-column align-items-center mb-2'>
                                         <label className='label'>Asking Price</label>
-                                        <h4 className='step="0.01"'>$ {ad.price}</h4>
+                                        <h4 className=''>$ {ad.price}</h4>
                                     </div>
                                     <button className='btn btn-primary mt-2'>
                                         {/* links to contact listing owner view, ("/#/" + creator._id + "/contact")*/}
@@ -65,7 +65,7 @@ const AdDetails = () => {
                             </div>
         
                                 <div className={`rounded-3 ${styles.description}`} >
-                                    <p className='border fs-4 p-2'>
+                                    <p className='border p-2'>
                                         {ad.description}
                                     </p>
                                 </div>

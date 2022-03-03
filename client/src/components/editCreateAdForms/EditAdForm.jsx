@@ -19,6 +19,7 @@ const EditAdForm = () => {
     const [ city, setCity ] = useState('');
     const [ state, setState ] = useState('');
     const [ email, setEmail ] = useState('');
+    const [errors, setErrors] = useState(null);
 
     const categories = [
         "antiques", "appliances", "arts+crafts", "barter", "bikes", "boats",
@@ -96,8 +97,16 @@ const EditAdForm = () => {
                 }
                 adService.updateAd(formData)
                     .then(response => {
-                        let newAd = response.data
-                        history.push(`/posted/${newAd.id}`);
+                        if(response.status === 207){
+                            let errorList = [];
+                            for(const err of response.data){
+                                errorList.push(err.defaultMessage)
+                            }
+                            setErrors(errorList);
+                        }else {
+                            let newAd = response.data
+                            history.push(`/posted/${newAd.id}`);
+                        }
                     })
                 })
         } else {
@@ -114,8 +123,16 @@ const EditAdForm = () => {
             }
             adService.updateAd(formData)
                 .then(response => {
-                    let newAd = response.data
-                    history.push(`/posted/${newAd.id}`);
+                    if(response.status === 207){
+                        let errorList = [];
+                        for(const err of response.data){
+                            errorList.push(err.defaultMessage)
+                        }
+                        setErrors(errorList);
+                    }else {
+                        let newAd = response.data
+                        history.push(`/posted/${newAd.id}`);
+                    }
                 })
         }
     }
@@ -166,10 +183,17 @@ const EditAdForm = () => {
                             <select onChange={(e) => setState(e.target.value)} value={state} name="state" className="form-control">
                                 <option value="">--</option>
                                 {states.map((state, i) =>
-                                    <option key={i} value={state}>{state}</option>
+                                    <option key={i} value={state} className='my-0'>{state}</option>
                                 )}
                             </select>
                         </div>
+                        {errors && 
+                            <div className='aler alert-danger d-flex flex-column align-items-center'>
+                                {errors.map((err, i) =>
+                                <p key={i}>{err}</p>
+                                )}
+                            </div>
+                        }
                         <input type="submit" value="Update Ad" className="btn btn-secondary mt-3" />
                     </div>
                 </div>
