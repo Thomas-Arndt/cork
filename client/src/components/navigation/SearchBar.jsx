@@ -3,8 +3,10 @@ import adService from '../../services/AdService';
 
 
 
+
 const SearchBar = ({ setAdList, category }) => {
   const [ query, setQuery ] = useState('');
+
 
   const handleSubmit = (e) => {
     e.preventDefault();

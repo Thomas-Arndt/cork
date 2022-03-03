@@ -25,7 +25,8 @@ const FilterForm = ({ setAdList, category, setCategory }) => {
         adService.getAllAds(category)
             .then(response => setAdList(response.data))
     }, []);
-    
+
+  
     const handleSubmit = (e) => {
         e.preventDefault();
         adService.getAllAds(category)

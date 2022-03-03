@@ -28,6 +28,7 @@ import Spacer from './components/navigation/navigationButtons/Spacer';
 
 
 function App() {
+
   const [ adList, setAdList ] = useState([]);
   const [ category, setCategory ] = useState('all');
 
