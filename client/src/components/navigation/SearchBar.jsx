@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import adService from '../../services/AdService';
-
+import styles from './SearchBar.module.css';
 
 
 
@@ -26,7 +26,7 @@ const SearchBar = ({ setAdList, category }) => {
     <form onSubmit={handleSubmit} >
         <div className='d-flex flex-column px-3 pt-3'>
             <input onChange={(e)=>setQuery(e.target.value)} value={query} type='text' className='form-control p-0 px-2' placeholder='Search Ads'/>
-            <button className='btn btn-primary p-0 px-1 mt-2'>
+            <button className={`${styles.button} mt-2`}>
                 Go!
             </button>
         </div>

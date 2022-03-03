@@ -53,7 +53,7 @@ const DeleteForm = () => {
                         <input type="text" name="deleteAd" className="form-control" onChange={handleChange}/>
                     </div>
                     <div className='d-flex justify-content-center my-3'>
-                        <button className='btn btn-success px-3' disabled={disabled}>
+                        <button className={styles.button} disabled={disabled}>
                             Delete
                         </button>
                     </div>

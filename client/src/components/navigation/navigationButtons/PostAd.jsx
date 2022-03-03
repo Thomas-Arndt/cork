@@ -1,18 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
+import { useHistory } from 'react-router-dom';
+import styles from './navButton.module.css';
 
 const PostAd = () => {
-
+  const history = useHistory();
 
   return (
 
 
-    <button className='btn btn-primary  p-0 px-3'>
-        {/* links to create new listing  view, ("/create")*/}
-        <Link to={"/post_ad"} className='text-light text-decoration-none text-nowrap'>
+    <button onClick={() => history.push('/post_ad')} className={styles.button}>
             Post Ad
-        </Link>
     </button>
 
 

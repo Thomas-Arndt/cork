@@ -1,5 +1,4 @@
 import React from 'react';
-import adService from '../../services/AdService';
 import StickyNote from './StickyNote';
 import styles from './AllAds.module.css';
 

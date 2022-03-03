@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import adService from '../../services/AdService';
+import styles from './FilterForm.module.css';
 
 
 
@@ -21,9 +22,8 @@ const FilterForm = ({ setAdList, category, setCategory }) => {
     ];
 
     useEffect(() => {
-        console.log(category);
         adService.getAllAds(category)
-            .then(response => setAdList(response.data))
+            .then(response => setAdList(response.data.reverse()))
     }, []);
 
   
@@ -32,6 +32,7 @@ const FilterForm = ({ setAdList, category, setCategory }) => {
         adService.getAllAds(category)
             .then(response => {
                 let tempList = [...response.data];
+                tempList.reverse();
                 if(min && min > 0) {
                     tempList = tempList.filter( ad => ad.price >= min);
                 }
@@ -39,7 +40,7 @@ const FilterForm = ({ setAdList, category, setCategory }) => {
                     tempList = tempList.filter( ad => ad.price <= max);
                 }
                 if(hasImage) {
-                    tempList = tempList.filter( ad => ad.image !== null);
+                    tempList = tempList.filter( ad => ad.image !== "Default_Image.png");
                 }
                 if(postedToday) {
                     const today = new Date();
@@ -79,7 +80,7 @@ const FilterForm = ({ setAdList, category, setCategory }) => {
                     <label className='mx-3'>Posted Today</label>
                 </div>
             </div>
-            <button className='btn btn-primary p-0 px-1'>
+            <button className={styles.button}>
                     Filter
             </button>
         </form>

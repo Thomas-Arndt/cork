@@ -39,7 +39,7 @@ const AdDetails = () => {
                     <div>
                         <h2 className={styles.title}>{ad.title}</h2>
         
-                            <div className='d-flex mt-1 p-3 gap-5' style={{width: '550px', height: '350px'}}>
+                            <div className='d-flex mt-1 p-3 gap-5'>
                                 <div className='d-flex  p-3'>
                                     <div className='d-flex align-items-start'>
                                         <img src={image} alt="Advertisement" className={styles.image} />
@@ -58,9 +58,9 @@ const AdDetails = () => {
                                         <label className='label'>Asking Price</label>
                                         <h4>$ {ad.price.toFixed(2)}</h4>
                                     </div>
-                                    <button className='btn btn-primary mt-2'>
+                                    <button className={styles.button}>
                                         {/* links to contact listing owner view, ("/#/" + creator._id + "/contact")*/}
-                                        <Link to={`/contact/${adId}`} className='text-light text-decoration-none'>
+                                        <Link to={`/contact/${adId}`} className='text-black text-decoration-none'>
                                             Contact
                                         </Link>
                                     </button>
