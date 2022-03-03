@@ -51,7 +51,7 @@ public class AdController {
 
     @PostMapping("/createAd")
     public ResponseEntity<?> createAd(@Valid @RequestBody Ad ad, BindingResult result) {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return new ResponseEntity<>(result.getFieldErrors(), HttpStatus.valueOf(207));
         } else {
             Ad newAd = adService.createAd(ad);
@@ -61,12 +61,14 @@ public class AdController {
     }
 
     @PostMapping("/uploadImage")
-    public ResponseEntity<Map<String, String>> uploadImage(@RequestParam(value="file", required=false) MultipartFile file) {
+    public ResponseEntity<Map<String, String>> uploadImage(
+            @RequestParam(value = "file", required = false) MultipartFile file) {
         String fileName = "drawing-pin.png";
-        if(file != null) {
+        if (file != null) {
             UUID guid = UUID.randomUUID();
-            File absolutePath = new File("/home/bebop/Coding/CodingDojo/projects/java/cork/client/src/static/images/adImages/" + guid
-            + file.getOriginalFilename());
+            File absolutePath = new File(
+                    "/home/bebop/Coding/CodingDojo/projects/java/cork/client/src/static/images/adImages/" + guid
+                            + file.getOriginalFilename());
             fileName = guid + file.getOriginalFilename();
             try {
                 file.transferTo(absolutePath);
@@ -80,9 +82,13 @@ public class AdController {
     }
 
     @PostMapping("/contactSeller")
-    public ResponseEntity<Ad> contactSeller(@RequestBody ContactMessage message) {
-        Ad contactMessage = adService.contactSeller(message);
-        return ResponseEntity.ok(contactMessage);
+    public ResponseEntity<?> contactSeller(@Valid @RequestBody ContactMessage message, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ResponseEntity<>(result.getFieldErrors(), HttpStatus.valueOf(207));
+        } else {
+            Ad contactMessage = adService.contactSeller(message);
+            return ResponseEntity.ok(contactMessage);
+        }
 
     }
 
@@ -102,7 +108,7 @@ public class AdController {
 
     @PutMapping("/updateAd/{id}")
     public ResponseEntity<?> updateAd(@Valid @RequestBody Ad ad, BindingResult result) {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return new ResponseEntity<>(result.getFieldErrors(), HttpStatus.valueOf(207));
         } else {
             Ad updatedAd = adService.updateAd(ad);

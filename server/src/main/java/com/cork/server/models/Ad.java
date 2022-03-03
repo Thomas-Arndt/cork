@@ -37,8 +37,8 @@ public class Ad {
     @NotNull(message = "Category is required")
     private String category;
 
-    @Size(min = 12, message="Description must be at least 12 characters.")
-    @Size(max = 65000, message="Description cannot be more than 65,000 characters.")
+    @Size(min = 12, message = "Description must be at least 12 characters.")
+    @Size(max = 65000, message = "Description cannot be more than 65,000 characters.")
     @Type(type = "text")
     private String description;
 
